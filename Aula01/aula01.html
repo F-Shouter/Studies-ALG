@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        image { animation: hu__hu__ infinite 2s ease-in-out }
+        @keyframes hu__hu__ {
+        50% { transform: translateY(30px) }
+}
+    </style>
+</head>
+<body>
+
+    <h1>Hello-World!</h1>
+    <h2>Welcome SPTecher</h2>
+    <img src="image/images.png" alt="">
+    <h3>Cumprimentar usuário!</h3>
+
+    <input id="input_nome" type="text">
+
+    <button onclick="cumprimentar()">Cumprimentar</button>
+
+</body>
+</html>
+
+<script>
+
+    function cumprimentar(){
+       alert("Hello user! " + input_nome.value + " Welcome!");
+    }
+
+</script>
