@@ -7,20 +7,20 @@
 </head>
 <body>
     
-    Primeiro número:
-    <input id="input_n1" type="text">
+        Primeiro número:
+        <input id="input_n1" type="text">
 
-    <br><br>
+        <br><br>
 
-    Segundo número:
-    <input id="input_n2" type="text">
+        Segundo número:
+        <input id="input_n2" type="text">
 
-    <br><br>
+        <br><br>
 
-    <button onclick="somar()">Somar</button>
-    <button onclick="subtrair()">Subtrair</button>
-    <button onclick="multiplicar()">Multiplicar</button>
-    <button onclick="dividir()">Dividir</button>
+        <button onclick="somar()">Somar</button>
+        <button onclick="subtrair()">Subtrair</button>
+        <button onclick="multiplicar()">Multiplicar</button>
+        <button onclick="dividir()">Dividir</button>
 
 </body>
 </html>
@@ -28,7 +28,10 @@
 <script>
 
     function somar() {
-        alert("O resultado da soma é: " + (Number.parseInt(input_n1.value) + Number.parseInt(input_n2.value)))
+        var n1 = Number(input_n1.value)
+        var n2 = Number(input_n2.value)
+        var soma = n1 + n2
+        alert("O resultado da soma é: " + soma)
     }
 
     function subtrair() {
