@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 2</title>
+</head>
+<body>
+
+    Qual o valor da pizza? <input id="input_valor" type="text">
+    <br><br>
+    Quantidade de pessoas? <input id="input_qtd" type="text">
+    <br><br>
+
+    <button onclick="calcular()">#lovePizza</button>
+    <br><br>
+
+</body>
+</html>
+
+<script>
+
+    function calcular(){
+
+        var valor = Number(input_valor.value)
+        var qtd = Number(input_qtd.value)
+        var resultado = valor / qtd
+
+        alert("Cada um dos " + qtd + " amigos vai pagar R$ " + resultado + " reais.")
+    }
+
+</script>

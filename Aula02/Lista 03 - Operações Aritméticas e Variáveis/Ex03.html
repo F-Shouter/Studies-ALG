@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 3</title>
+</head>
+<body>
+
+    Qual o valor da passagem? <input id="input_valor" type="text">
+    <br><br>
+    Quantidade de viajens por mês? <input id="input_qtd" type="text">
+    <br><br>
+
+    <button onclick="calcular()">Ver economia</button>
+    <br><br>
+
+</body>
+</html>
+
+<script>
+
+    function calcular(){
+
+        var valor = Number(input_valor.value)
+        var qtd = Number(input_qtd.value)
+        var resultado = qtd * valor
+        alert("Você economizará R$ " + resultado + " por mês.")
+    }
+
+</script>
