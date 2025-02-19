@@ -7,7 +7,7 @@
 </head>
 <body>
     
-    <!-- O contador está em 0: -->
+    <div id="div_contagem" > O contador está em 0: </div>
 
     <button onclick="decrementar()"> - </button>
     <button onclick="incrementar()"> + </button>
@@ -18,17 +18,15 @@
 
 <script>
     
-    alert("Seja bem vindo!");
     var contador = 0;
 
     function incrementar() {
         contador = contador + 1;
-        alert("O contador está em... " + contador);
+        div_contagem.innerHTML = "O contador está em... " + contador;
     }
     function decrementar() {
         contador = contador - 1;
-        alert("O contador está em... " + contador); 
+        div_contagem.innerHTML = "O contador está em... " + contador;
     }
-
 
 </script>
