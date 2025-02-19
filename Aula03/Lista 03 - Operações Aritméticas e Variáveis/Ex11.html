@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    
+    <fieldset id="fieldset_input" >
+        Ver tabuaba do número:
+        <input type="text" id="input_num">
+    </fieldset><br>
+
+    <button onclick="tabuar()">Ver Tabuada</button>
+
+</body>
+</html>
+
+<script>
+
+    var count = 0;
+
+    function tabuar(){
+        var num = input_num.value;
+        count = count + 1;
+        var operacao = `${num} X ${count} = ${num * count} <br>`;
+        fieldset_input.innerHTML = operacao;
+
+        while (count <= 9) {
+            count = count + 1;
+            var operacao = `${num} X ${count} = ${num * count} <br>`;
+            fieldset_input.innerHTML = fieldset_input.innerHTML + operacao;
+        }
+    }
+</script>
