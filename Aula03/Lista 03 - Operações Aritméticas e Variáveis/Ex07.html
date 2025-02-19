@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" countent="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <button onclick="receber100()">Receber 100</button> <br><br>
+
+    <button onclick="pagar50()">Pagar 50</button> <br><br>
+
+    <div><b id="div_receber">
+        Saldo do usuário: 0
+    </b></div>
+
+</body>
+</html>
+<script>
+
+    var count = 0;
+
+    function receber100(){
+        count = count + 100;
+        div_receber.innerHTML = `Saldo do usuário: ${count}`;
+        alert (`Transferência de R$100 recebida! Saldo atual: R$${count}`)
+    }
+
+    function pagar50(){
+        count = count - 50;
+        div_receber.innerHTML = `Saldo do usuário: ${count}`;
+        alert (`Pagamento de R$50 efetuado! Saldo atual: R$${count}`)
+    }
+
+</script>
