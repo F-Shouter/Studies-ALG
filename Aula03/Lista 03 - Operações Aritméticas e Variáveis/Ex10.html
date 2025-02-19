@@ -4,19 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+        div{
+            height: 230px;
+            width: 180px;
+        }
+    </style>
 </head>
 <body>
     
-    <b>Votos:</b><br><br>
+    <fieldset>
+        <legend><b>VOTOS</b></legend>
 
-    Candidato A:
-    <input type="text" id="input_A"><br>
+        <div id="div_input" >
 
-    Candidato B:
-    <input type="text" id="input_B"><br>
+            Candidato A:
+            <input type="text" id="input_A"><br><br>
+            Candidato B:
+            <input type="text" id="input_B"><br><br>
+            Em branco:
+            <input type="text" id="input_branco"><br><br>
+            
+            Em nulo:
+            <input type="text" id="input_nulo">
 
-    Em branco:
+        </div>
 
+    </fieldset><br>
+
+    <button onclick="calcular()" >Resultado da Eleição</button>
 
 </body>
 </html>
+<script>
+
+    function calcular(){
+
+        var A = Number(input_A.value);
+        var B = Number(input_B.value);
+        var branco = Number(input_branco.value);
+        var nulo = Number(input_nulo.value);
+
+        var totalVoto = A + B + branco + nulo;
+
+        div_input.innerHTML = `
+            Total de votos: ${totalVoto}<br><br>  
+            Candidato A: ${(100 * A)/totalVoto}% <br>(${A} votos)<br><br>  
+            Candidato B: ${(100 * B)/totalVoto}% <br>(${B} votos)<br><br> 
+            Inválidos: ${(100*(branco + nulo))/totalVoto}% <br>(${branco+nulo} votos)  
+        `
+
+    }
+
+</script>
