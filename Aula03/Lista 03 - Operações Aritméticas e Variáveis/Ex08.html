@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div><b id="input_contagem" >Saldo atual:</b></div> <br><br>
+
+    Solicite o valor a ser depositado/retirado pelo usuário:
+    <input id="input_valor" type="number"> <br><br>
+
+    <button onclick="depositar()" >Depositar</button> <br><br>
+    <button onclick="retirar()" >Retirar</button> <br><br>
+
+</body>
+</html>
+
+<script>
+    var saldoAtual = 0;
+    
+    function depositar(){
+        var valor = Number(input_valor.value);
+        saldoAtual = (saldoAtual + valor);
+        input_contagem.innerHTML = `Saldo atual: ${saldoAtual}`;
+        alert(`Depósito de R$${valor} efetuado! Saldo atual: R$${saldoAtual} `);
+    }
+    function retirar(){
+        var valor = Number(input_valor.value);
+        saldoAtual = (saldoAtual - valor);
+        input_contagem.innerHTML = `Saldo atual: ${saldoAtual}`;
+        alert(`Retirada de R$${valor} efetuada! Saldo atual: R$${saldoAtual} `);
+    }
+
+</script>
