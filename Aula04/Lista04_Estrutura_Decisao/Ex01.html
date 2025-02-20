@@ -19,13 +19,12 @@
     <fieldset>
         Sua idade: <input type="text" id="input_idade">
         <button onclick="ir()">Ir pra festa</button>
-    </fieldset><br>
-    <div id="div_mensagem"></div>
+    </fieldset>
 </body>
 </html>
 <script>
     function ir(){
-        var idade = input_idade.value;
+        var idade = Number(input_idade.value);
         if(idade<18){
             alert(`Pedir permissão pro responsáve!`);
             alert(`#partiuFesta`);

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>Consumo de refrigerenate</legend>
+        Qtd de lata por dia: <input type="text" id="input_qtdDia">
+        <button onclick="calcular()">Quantos refris?</button>
+    </fieldset><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var qtdDia = Number(input_qtdDia.value);
+        var qtdAno = qtdDia * 365;
+        div_mensagem.innerHTML = `A quantidade de latinhas que consome por ano é de: ${qtdAno} latinhas.`;
+        if(qtdAno>500){
+            div_mensagem.innerHTML += `<br><br>Cuidado com a diabetes!`
+        }
+    }
+</script>
