@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        Informe um número: <input type="text" id="input_num">
+        <button onclick="analisar()">Analisar</button><br>
+        <div id="div_mensagem"></div>
+    </fieldset>
+    
+</body>
+</html>
+<script>
+    function analisar(){
+        var num = Number(input_num.value);
+        if (num<42){
+            div_mensagem.innerHTML = `<br>Número ${num} é <b>MENOR</b> que 42! <br><br><img src="image/images.jpg" alt="">`;
+        }else if (num==42){
+            div_mensagem.innerHTML = `<br>Número ${num} é <b>IGUAL</b> a 42! <br><br><img src="image/kawaii.webp" alt="">`;
+        }else {div_mensagem.innerHTML = `<br>Número ${num} é <b>MAIOR</b> que 42!`}
+        alert(num)
+    }
+</script>
