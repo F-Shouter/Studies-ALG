@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        nota 1: <input type="text" id="input_n1"><br><br>
+        nota 2: <input type="text" id="input_n2"><br><br>
+        nota 3: <input type="text" id="input_n3"><br><br>
+        <button onclick="calcular()">Analisar desempenho</button>
+    </fieldset><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var n1 = Number(input_n1.value);
+        var n2 = Number(input_n2.value);
+        var n3 = Number(input_n3.value);
+        var media = (n1+n2+n3)/3;
+        div_mensagem.innerHTML = `
+            Sua média foi de ${media}.
+        `;
+        if(media>9.4){
+            div_mensagem.innerHTML += `Parabéns, você é fora de série!`;
+        }
+    }
+</script>
