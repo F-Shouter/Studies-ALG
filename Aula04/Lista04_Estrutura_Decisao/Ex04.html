@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>Pizza</legend>
+        Valor: <input type="text" id="input_valor"><br><br>
+        n° pessoa: <input type="text" id="input_num"><br><br>
+    </fieldset><br>
+    <button>Rola a pizza?</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var valor = Number(input_valor.value);
+        var num = Number(input_num.value);
+        var cada = valor/num;
+        div_mensagem.innerHTML = `Cada amigo vai pagar R$${cada} pela pizza`;
+        if(cada>20){
+            div_mensagem.innerHTML += `Deu ruim! Pizza muito cara!`;
+        }
+    }
+</script>
