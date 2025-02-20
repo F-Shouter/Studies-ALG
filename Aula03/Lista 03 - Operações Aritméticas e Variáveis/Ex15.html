@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>IMC</legend>
+        Peso: <input type="text" id="input_peso"><br><br>
+        Altura: <input type="text" id="input_altura"><br><br>
+    </fieldset><br>
+    <button onclick="calcular()">Calcular IMC</button><br>
+    <div id="div_input"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var peso = Number(input_peso.value);
+        var altura = Number(input_altura.value);
+        var imc = peso/(altura * altura);
+        if (imc<18.5){
+            div_input.innerHTML = `Magreza`; 
+        }else if (imc<=24.9){
+            div_input.innerHTML = `Normal`; 
+        }else if (imc<=29.9){
+            div_input.innerHTML = `Sobrepeso`; 
+        }else if (imc<=39.9){
+            div_input.innerHTML = `Obesidade`; 
+        }else {
+            div_input.innerHTML = `Obesidade Grave`; 
+        }
+    }
+</script>
