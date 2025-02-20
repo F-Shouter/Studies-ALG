@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    
+    <fieldset id="fieldset_input">
+        <legend>PIZZA</legend>
+        Sabor: <input type="text" id="input_sabor"><br><br>
+        Preço: <input type="text" id="input_preco"><br><br>
+        n° Pessoa: <input type="text" id="input_qtd">
+    </fieldset><br>
+
+    <button onclick="calcular()">Ver valor por amigo</button>
+
+</body>
+</html>
+
+<script>
+    function calcular(){
+        var sabor = input_sabor.value;
+        var preco = Number(input_preco.value);
+        var qtd = Number(input_qtd.value);
+        var caixinha = preco * 0.1;
+        var cada = (preco + caixinha)/qtd;
+        fieldset_input.innerHTML = `
+            Cada amigo vai colaborar com R$${cada} <br>
+            para a pizza de ${preco}.
+        `;
+    }
+</script>

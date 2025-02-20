@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset id="fieldset_input">
+        <legend>VT</legend>
+        Valor de passagem: <input type="text" id="input_valor"><br><br>
+        Qtd por mês: <input type="text" id="input_qtd"><br><br>
+        Distância(km): <input type="text" id="input_km">
+    </fieldset><br>
+    <button onclick="calcular()">Calcular VT</button>
+</body>
+</html>
+<script>
+    function calcular(){
+        var valor = Number(input_valor.value);
+        var qtd = Number(input_qtd.value);
+        var km = Number(input_km.value);
+        var uber = (km * 0.75);
+        var bus = (valor);
+        var VT = ((qtd * 0.1) * uber) + ((qtd * 0.9) * bus)
+
+        fieldset_input.innerHTML = `
+            Você vai gastar R$${VT.toFixed(2)} por mês com transporte.  
+        `
+    }
+</script>
