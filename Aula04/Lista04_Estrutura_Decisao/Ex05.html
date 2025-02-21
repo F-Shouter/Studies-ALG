@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>
+            Algoritmolândia
+        </legend>
+        KWh no mês: <input type="text" id="input_kwh">
+    </fieldset><br>
+    <button onclick="calcular()">Calcular conta de luz</button>
+</body>
+</html>
+<script>
+    function calcular(){
+        var kwh = Number(input_kwh.value);
+        var conta = kwh * 0.85;
+        if (conta<100){
+            var contaDesconto = conta - (conta * 0.1);
+            alert(`Valor da conta a ser paga: ${contaDesconto} reais.`);
+        }
+        if(conta>=100){
+            alert(`Valor da conta a ser paga: ${conta} reais.`);
+        }
+    }
+</script>
