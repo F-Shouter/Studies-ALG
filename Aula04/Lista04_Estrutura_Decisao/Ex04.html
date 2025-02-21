@@ -21,7 +21,7 @@
         Valor: <input type="text" id="input_valor"><br><br>
         n° pessoa: <input type="text" id="input_num"><br><br>
     </fieldset><br>
-    <button>Rola a pizza?</button>
+    <button onclick="calcular()">Rola a pizza?</button><br><br>
     <div id="div_mensagem"></div>
 </body>
 </html>
@@ -32,7 +32,7 @@
         var cada = valor/num;
         div_mensagem.innerHTML = `Cada amigo vai pagar R$${cada} pela pizza`;
         if(cada>20){
-            div_mensagem.innerHTML += `Deu ruim! Pizza muito cara!`;
+            div_mensagem.innerHTML += `<br><b style="color: red;"><i> Deu ruim! Pizza muito cara! </i></b> `;
         }
     }
 </script>
