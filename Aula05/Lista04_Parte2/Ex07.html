@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        Valor do Saldo da Conta:
+        <input type="text" id="input_saldo"><br><br>
+        Valor a retirar:
+        <input type="text" id="input_debito"><br>
+    </fieldset><br>
+    <button onclick="analisar()">Analisar conta</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function analisar(){
+        var saldo = Number(input_saldo.value);
+        var deb = Number(input_debito.value);
+        var atual = saldo - deb;
+        div_mensagem.innerHTML = `O saldo atual da conta corrente é ${atual}`;
+        if (atual<0){
+            div_mensagem.innerHTML = `<b style= "color: red">O saldo atual da conta corrente é ${atual}</b>`;
+        }
+    }
+</script>
