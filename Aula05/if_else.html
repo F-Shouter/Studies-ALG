@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>If Else</legend>
+        Insira um número:
+        <input type="text" id="input_num"><br>
+        <button onclick="analisar()">Analisar</button><br>
+        <div id="div_mensagem"></div>
+    </fieldset>
+</body>
+</html>
+<script>
+    function analisar(){
+        var num = Number(input_num.value);
+        if(num >= 0){
+            div_mensagem.innerHTML = `<b style= "color: green">O número ${num} é POSITIVO </b>`;
+        }else {div_mensagem.innerHTML = `<b style= "color: red">O número ${num} é NEGATIVO </b>`;}
+    }
+</script>
