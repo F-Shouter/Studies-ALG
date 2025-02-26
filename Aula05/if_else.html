@@ -12,24 +12,42 @@
             height: 100vh; 
             margin: 0; 
             flex-direction: column; 
+            background-color: rgb(255, 255, 255);
+        }
+        fieldset {
+            padding: 7px 7px;
+            border-radius: 15px;
+            border-color: rgba(255, 255, 255, 0);
+            background-color: rgb(226, 226, 226);
+        }
+        input {
+            border-color: aliceblue;
+            border-radius: 10px;
+        }
+        button {
+            border-color: aliceblue;
+            border-radius: 15px;
+            background-color: rgb(75, 74, 74);
+            color: white;
+            width: 100px;
+            height: 30px;
         }
     </style>
 </head>
 <body>
     <fieldset>
-        <legend>If Else</legend>
         Insira um número:
         <input type="text" id="input_num"><br>
-        <button onclick="analisar()">Analisar</button><br>
-        <div id="div_mensagem"></div>
-    </fieldset>
+    </fieldset><br>
+    <button onclick="analisar()">Analisar</button><br>
+    <div id="div_mensagem"></div>
 </body>
 </html>
 <script>
     function analisar(){
         var num = Number(input_num.value);
         if(num >= 0){
-            div_mensagem.innerHTML = `<b style= "color: green">O número ${num} é POSITIVO </b>`;
-        }else {div_mensagem.innerHTML = `<b style= "color: red">O número ${num} é NEGATIVO </b>`;}
+            div_mensagem.innerHTML += `<b style= "color: green">O número ${num} é POSITIVO </b><br>`;
+        }else {div_mensagem.innerHTML += `<b style= "color: red">O número ${num} é NEGATIVO </b><br>`;}
     }
 </script>
