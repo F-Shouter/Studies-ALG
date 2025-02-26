@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        Última série assistida:
+        <input type="text" id="input_sitcom"><br><br>
+        Total de episódios assistidos:
+        <input type="text" id="input_ep"><br>
+    </fieldset><br>
+    <button onclick="verificar()">Verificar nível</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function verificar(){
+        var sitcom = input_sitcom.value;
+        var ep = Number(input_ep.value);
+        var hour = (ep * 22)/60;
+        div_mensagem.innerHTML = `Vejo que você gosta da série ${sitcom}`;
+        if (hour>30){
+            div_mensagem.innerHTML += `<br>Uau, você realmente gosta dessa série!`;
+        }
+    }
+</script>
