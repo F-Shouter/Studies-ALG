@@ -1,0 +1,21 @@
+body {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
+    margin: 0; 
+    flex-direction: column; 
+}
+fieldset {
+    border-radius: 15px;
+}
+button {
+    background-color: rgb(61, 61, 61);
+    border-radius: 10px;
+    width: 100px;
+    height: 23px;
+    color: white;
+}
+input {
+    background-color: white;
+}
