@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        Nome:
+        <input type="text" id="input_name"><br><br>
+        Idade:
+        <input type="text" id="input_old"><br>
+    </fieldset><br>
+    <button onclick="avaliar()">Avaliar aluno</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function avaliar(){
+        var name = input_name.value;
+        var old = Number(input_old.value);
+        if (old>=18){
+            div_mensagem.innerHTML = `<b>${name}, vamos tirar a CNH?</b>`;
+        }else {div_mensagem.innerHTML = `<b>${name}, vai jogar PlayStation!</b>`;}
+    }
+</script>
