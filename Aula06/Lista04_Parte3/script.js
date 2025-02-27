@@ -1,8 +1,9 @@
-function avaliar(){
-    var saldo = Number(input_saldo.value);
-    var deb = Number(input_deb.value);
-    var atual = saldo - deb;
-    if (atual>=0){
-        div_mensagem.innerHTML = `<b style= "color: blue"><i>o saldo atual da conta corrente é ${atual}</i></b>`;
-    }else {div_mensagem.innerHTML = `<b style= "color: red"><i>o saldo atual da conta corrente é ${atual}</i></b>`;}
+/* Exercício 16 */
+function comprar(){
+    var qtd = Number(input_qtd.value);
+    var total = 0;
+    if(qtd >= 12){
+        total = qtd * 2.5;
+    }else {total = qtd * 3;}
+    div_mensagem.innerHTML = `O valor da sua compra foi de R$${total} reais.`;
 }
