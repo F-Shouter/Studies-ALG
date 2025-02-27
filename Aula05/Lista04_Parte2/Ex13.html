@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        Nota1:
+        <input type="text" id="input_n1"><br><br>
+        Nota2:
+        <input type="text" id="input_n2"><br>
+    </fieldset><br>
+    <button onclick="verificar()">Verificar aituação</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function verificar(){
+        var n1 = Number(input_n1.value);
+        var n2 = Number(input_n2.value);
+        var media = (n1 + n1)/2;
+        if (media>=6){
+            div_mensagem.innerHTML = `<b>Parabéns, aprovado!</b>`;
+        }else {div_mensagem.innerHTML = `<b>Tente outra vez...</b>`;}
+    }
+</script>
