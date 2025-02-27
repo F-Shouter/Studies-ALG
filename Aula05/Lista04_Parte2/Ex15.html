@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta saldo="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            margin: 0; 
+            flex-direction: column; 
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    <fieldset>
+        Saldo:
+        <input type="text" id="input_saldo"><br><br>
+        Retirar:
+        <input type="text" id="input_deb"><br>
+    </fieldset><br>
+    <button onclick="avaliar()">Avaliar aluno</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function avaliar(){
+        var saldo = Number(input_saldo.value);
+        var deb = Number(input_deb.value);
+        var atual = saldo - deb;
+        if (atual>=0){
+            div_mensagem.innerHTML = `<b style= "color: blue"><i>o saldo atual da conta corrente é ${atual}</i></b>`;
+        }else {div_mensagem.innerHTML = `<b style= "color: red"><i>o saldo atual da conta corrente é ${atual}</i></b>`;}
+    }
+</script>
