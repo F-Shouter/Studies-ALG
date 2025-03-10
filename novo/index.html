@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<!-- QUESTÃO -->
+<!-- a) Solicite que o usuário informe um número decimal de até 100000.
+b) Ao clicar no botão "Calcular", calcule e exiba o número convertido em binário.
+c) O resultado em binário deve estar vermelho e em negrito.
+d) números "0" na frente do resultado em binário deverão ser dispensados. Exemplo:
+Correto: 1010
+Incorreto: 0001010 -->
+
+<!-- RESOLUÇÃO: -->
+    Converter decimal para binário, número máximo: 100000<br><br>
+    <input type="text" id="input_num">
+    <button onclick="calcular()">Calcular</button><br><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var num = Number(input_num.value);
+        var string = '';
+        if(num >= 65536){
+            num = (num - 65536);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 32768){
+            num = (num - 32768);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 16384){
+            num = (num - 16384);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 8192){
+            num = (num - 8192);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 4096){
+            num = (num - 4096);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 2048){
+            num = (num - 2048);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 1024){
+            num = (num - 1024);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 512){
+            num = (num - 512);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 256){
+            num = (num - 256);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 128){
+            num = (num - 128);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 64){
+            num = (num - 64);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 32){
+            num = (num - 32);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 16){
+            num = (num - 16);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 8){
+            num = (num - 8);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 4){
+            num = (num - 4);
+            string = string + '1';
+        }else{
+            string = string + '0';
+        }
+        if(num >= 2){
+            num = (num - 2);
+            string = string + '1';
+        }else{string = string + '0';
+
+        }
+        if(num >= 1){
+            num = (num - 1);
+            string = string + '1';
+        }else{string = string + '0';}
+
+        var binario = Number(string);
+        div_mensagem.innerHTML = `<b style= "color: red">${binario}</b>`;
+    }
+</script>
