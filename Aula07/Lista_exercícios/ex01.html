@@ -3,9 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Aninhamento</title>
+    <style>
+        /* Estilo Geral */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f2f5;
+            text-align: center;
+            padding: 50px;
+        }
+
+        /* Card Central */
+        .container {
+            background: white;
+            width: 350px;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h3 {
+            color: #1877f2;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        /* Campo de Input */
+        input {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 5px rgba(24, 119, 242, 0.3);
+        }
+
+        /* Botão */
+        button {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        button:hover {
+            background: #165db5;
+            transform: scale(1.05);
+        }
+
+        /* Mensagem */
+        #div_mensagem {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .fade-in {
+            opacity: 1 !important;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="container">
+        <input type="text" id="input_altura" placeholder="Informe sua altura">
+        <br><br>
+        <button onclick="analisar()">Analisar Estatura</button>
+        <br><br>
+        <div id="div_mensagem"></div>
+    </div>
 </body>
 </html>
+<script>
+    function analisar(){
+        var altura = Number(document.getElementById("input_altura").value);
+        var mensagem = document.getElementById("div_mensagem");
+
+        if (altura <= 1.65){
+            mensagem.innerHTML = "Você pode ser piloto de corrida";
+            mensagem.style.color = "black";
+        } else if (altura <= 1.8){
+            mensagem.innerHTML = "Você pode ser jogador de futebol";
+            mensagem.style.color = "black";
+        } else {
+            mensagem.innerHTML = "Você pode ser jogador de vôlei ou basquete";
+            mensagem.style.color = "black";
+        }
+
+        mensagem.classList.add("fade-in");
+        setTimeout(() => {
+            mensagem.classList.remove("fade-in");
+        }, 2000);
+    }
+</script>
