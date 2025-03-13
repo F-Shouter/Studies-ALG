@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Qual Pokémon inicial você escolheria entre Bulbasaur, Charmander ou Squirtle?<br> 
+    <input id="input_poke" type="text">
+    <button onclick="calcular()">Escolher Pokémon</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function calcular(){
+        var poke = input_poke.value;
+        if (poke == "Bulbasaur"){
+            div_mensagem.innerHTML = `<img src="image/mato.png" alt="">`;
+        }else if (poke == "Charmander"){
+            div_mensagem.innerHTML = `<img src="image/fogo.png" alt="">`;
+        }else if (poke == "Squirtle"){
+            div_mensagem.innerHTML = `<img src="image/agua.png" alt="">`;
+        }else {
+            div_mensagem.innerHTML = `Pokémon não reconhecido.`;
+        }
+    }
+</script>
