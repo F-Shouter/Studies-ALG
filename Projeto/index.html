@@ -62,11 +62,12 @@
             var economiaDiaria = perdaEvitada - custoDiario;
     
             document.getElementById("resultado").innerHTML = `
-                <p<strong>>Custo diário com Diesel:</strong><br>
-                Gasta
-                    <strong>R$ ${custoDiario.toFixed(2)}</strong></p>
-                <p>Prejuízo evitado ao manter a temperatura ideal: <strong>R$ ${perdaEvitada.toFixed(2)}</strong></p>
-                <p>Economia líquida diária: <strong>R$ ${economiaDiaria.toFixed(2)}</strong></p>
+                <p><strong>Custo diário com Diesel:</strong><br>
+                Consumindo ${litrosPorHora} litros por cada hora. Em ${horasUso} horas de funcionamento por dia, será de custo: <strong>R$ ${custoDiario.toFixed(2)}</strong> reais.</p>
+                <p><strong>Prejuízo evitado ao manter a temperatura ideal:</strong>
+                Com o valor da carga sendo R$ ${valorCarga} reais e estipulando de que a percentual perda ocorreria em ${percentualPerda}% da carga, o valor do prejuízo evitado é de: <strong>R$ ${perdaEvitada.toFixed(2)} reais.</strong></p>
+                <p><strong>TOTAL de Economia líquida diária:</strong>
+                Gastando R$ ${custoDiario} reais de custo com Diesel, mas utilizando o sistema de mnitoramento e evitando possível prejuízo de R$ ${perdaEvitada}, a economia diária foi de: R$ <strong>R$ ${economiaDiaria.toFixed(2)} reias.</strong></p>
             `;
         }
     </script>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    Nome do passageiro: 
+    <input type="text" id="input_nome"><br>
+
+    Distância (em km) do local atual para o destino do passageiro:
+    <input type="text" id="input_distancia"><br>
+
+    Bandeira da corrida (o valor deve ser apenas 1, 2 ou 3):
+    <input type="number" id="input_bandeira"><br>
+
+    Horário da corrida (sistema de 24 horas e somente horas inteiras, entre 0 e 23):
+    <input type="number" id="input_hora"><br><br>
+
+    <button onclick="calcular()">Calcular corrida</button><br>
+
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+    function calcular(){
+
+        var nome = input_nome.value;
+        var distancia = Number(input_distancia.value);
+        var bandeira = Number(input_bandeira.value);
+        var hora = Number(input_hora.value);
+        var valorNominal = 1.25 * distancia;
+        var valorFinal = 0;
+
+        // Alerta para bandeira com número inválido
+        if (bandeira < 1){
+            alert(`
+            Não aceitamos como bandeira o número: ${bandeira}
+            Digite novamente um número válido!`);
+        }else if (bandeira > 3){
+            alert(`
+            Não aceitamos como bandeira o número: ${bandeira}
+            Digite novamente um número válido!`);
+        }
+
+        // Alerta para horário com número inválido
+        if (hora < 0){
+            alert(`
+            Não aceitamos como horário o número: ${hora}
+            Digite novamente um número válido!`);
+        }else if (hora > 23){
+            alert(`
+            Não aceitamos como horário o número: ${hora}
+            Digite novamente um número válido!`);
+        }
+
+        // Bandeira 1
+        if (bandeira == 1){
+            if (hora <= 6){
+                valorFinal = valorNominal * 1.05;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }else if (hora <=12){
+                valorFinal = valorNominal * 1.1;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }else {
+                valorFinal = valorNominal * 1.15;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }
+        }
+        
+        // Bandeira 2
+        if (bandeira == 2){
+            if (hora <= 6){
+                valorFinal = valorNominal * 1.1;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }else if (hora <=12){
+                valorFinal = valorNominal * 1.2;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }else {
+                valorFinal = valorNominal * 1.3;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }
+        }
+
+        // Bandeira 3
+        if (bandeira == 3){
+            if (hora <= 6){
+                valorFinal = valorNominal * 1.15;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }else if (hora <=12){
+                valorFinal = valorNominal * 1.3;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }else {
+                valorFinal = valorNominal * 1.45;
+                div_mensagem.innerHTML = `
+                    Olá ${nome}! Sua corrida, será na bandeira ${bandeira}, percorrerá ${distancia} km e o total da corrida será de ${valorFinal}
+                `;
+            }
+        }
+        
+    }
+</script>
