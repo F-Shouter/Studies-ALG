@@ -1,19 +1,78 @@
-html, body {
+body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    font-family: Arial, sans-serif;
     display: flex;
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center; /* Centraliza verticalmente */
+    flex-direction: column;
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    height: 100vh; /* Garante que a altura do corpo seja 100% da tela */
+    background-color: #f0f0f0;
 }
 
+/* Contêiner para título e corações */
+.lives {
+    display: flex;
+    flex-direction: column; /* Alinha verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    margin: 0; /* Remove margens extras */
+}
+
+/* Título centralizado */
+#div_titulo p {
+    margin: 0; /* Remove espaçamento interno/externo do título */
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Título centralizado */
+#div_titulo h1 {
+    margin: 0; /* Remove espaçamento interno/externo do título */
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Corações abaixo do título */
+#div_coracao {
+    font-size: 24px;
+    margin: 0; /* Remove margens desnecessárias */
+}
+
+/* Div master */
 .div_master {
-    width: 80%; /* Largura relativa ao tamanho da tela */
-    max-width: 500px; /* Largura máxima */
-    height: auto; /* Altura automática para o conteúdo */
-    padding: 20px; /* Espaçamento interno */
-    background-color: #f0f0f0; /* Cor de fundo */
-    border: 1px solid #ccc; /* Borda */
-    border-radius: 10px; /* Bordas arredondadas */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    padding: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    text-align: center;
+    max-width: 90%;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-continuar {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Estilo para o link dentro do botão */
+.btn-continuar  {
+    color: #ffffff; /* Deixa a fonte branca */
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Efeitos no botão */
+.btn-continuar:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.btn-continuar:active {
+    background-color: #003f7f;
+    transform: scale(0.95);
 }
