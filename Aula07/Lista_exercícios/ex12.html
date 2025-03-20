@@ -4,17 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #div_mensagem {
+            font-size: 200px;
+        }
+    </style>
 </head>
 <body>
-    Informe como está se sentindo hoje (Opções: "Feliz", "Triste", "Bravo", "Surpreso", "Cansado")<br> 
-    <input id="input_humor" type="text">
+    Informe como está se sentindo hoje (Opções: "Feliz", "Triste", "Bravo", "Surpreso", "Cansado")<br><br>
+    Humor:
+    <select id="select_humor">
+        <option>Feliz</option>
+        <option>Triste</option>
+        <option>Surpreso</option>
+        <option>Cansado</option>
+        <option>Bravo</option>
+    </select><br><br>
+    <!-- <input id="input_humor" type="text"> -->
     <button onclick="calcular()">Mostrar Humor</button>
     <div id="div_mensagem"></div>
 </body>
 </html>
 <script>
     function calcular(){
-        var humor = input_humor.value;
+        var humor = select_humor.value;
         if (humor == "Feliz"){
             div_mensagem.innerHTML = `😊`;
         }else if (humor == "Triste"){
