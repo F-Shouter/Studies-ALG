@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Login:
+    <input type="text" id="input_login"><br><br>
+    Password:
+    <input type="password" id="input_password"><br><br>
+    <button onclick="avaliar()">Entrar</button>
+</body>
+</html>
+<script>
+    function avaliar(){
+        var login = input_login.value;
+        var password = input_password.value;
+        if (login=="SPTech" && password=="digital"){
+            alert("Usuário autenticado com sucesso" );
+        }else {alert("Falha na autenticação" );}
+    }
+</script>

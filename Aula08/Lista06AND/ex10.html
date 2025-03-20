@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Minisistema de recarga<br><br>
+    Quanta passagem?
+    <input type="text" id="input_qtd"><br><br>
+    <button onclick="avaliar()">Comprar</button><hr>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function avaliar(){
+        var qtd = Number(input_qtd.value);
+        var desconto = 0;
+        if (qtd>=8 && qtd<=50){
+            if (qtd>=8 && qtd<=18){
+                desconto = 0.3;
+            }else if (qtd>=20 && qtd<=49){
+                desconto = 0.5;
+            }else {desconto = 0.7;}
+            div_mensagem.innerHTML = `Total a pagar: R$${(qtd*4.4)*desconto} `;
+        }else {alert("Quantidade inválida para o Fidelidade!");}
+    }
+</script>

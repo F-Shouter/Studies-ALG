@@ -51,7 +51,7 @@ body {
 }
 
 .btn-continuar {
-    padding: 10px 20px;
+    padding: 5px 7px;
     background-color: #007BFF;
     border: none;
     border-radius: 5px;
@@ -63,7 +63,7 @@ body {
 .btn-continuar  {
     color: #ffffff; /* Deixa a fonte branca */
     font-weight: bold;
-    font-size: 16px;
+    font-size: 8px;
 }
 
 /* Efeitos no botão */
