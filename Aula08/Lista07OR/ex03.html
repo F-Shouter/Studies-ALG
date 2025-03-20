@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Valor da renda individual:
+    <input type="text" id="input_rendaIndividual"><br><br>
+    Valor da renda familiar:
+    <input type="text" id="input_rendaFamiliar"><br><br>
+    <button onclick="ter()">Terei o beneficio?</button>
+</body>
+</html>
+<script>
+    function ter(){
+        var rendaIndividual = Number(input_rendaIndividual);
+        var rendaFamiliar = Number(input_rendaFamiliar.value);
+        if (rendaIndividual<=2000 || rendaFamiliar<=3000){
+            alert("Você terá direito ao auxílio");
+        }else {alert("Sem direito ao auxílio")};
+    }
+</script>
