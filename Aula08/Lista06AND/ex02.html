@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Renda do usuário:
+    <input id="input_rendaSolo" type="text"><br><br>
+    Renda total familiar:
+    <input id="input_rendaFamiliar" type="text"><br><br>
+    <button onclick="verificar()">Verificar ajuda</button>
+</body>
+</html>
+<script>
+    function verificar(){
+        var rendaSolo = Number(input_rendaSolo.value);
+        var rendaFamiliar = Number(input_rendaFamiliar.value);
+        if (rendaSolo<=1050 && rendaFamiliar<=2100){
+            alert("Você terá direito!");
+        }else {alert("Você NÃO terá direito!");}
+    }
+</script>
