@@ -1,0 +1,105 @@
+<!-- Criado por Marise Miranda | 2017.1 -->
+<!-- Adaptado por Matheus Matos | 2025.1 -->
+
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPTecher's Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="master">
+
+        <div class="container">
+            
+            <h3>Digite um número decimal:</h3>
+            <input id="demo1" type="number" placeholder="Ex: 42">
+            <select id="select_tipo">
+                <option disabled selected value="#">Selecione tipo</option>
+                <option>Octal</option>
+                <option>Hexadecimal</option>
+                <option>Binário</option>
+            </select>
+            <button onclick="converter()">Converter</button><br><br>
+            <div class="containerResultado">
+                <h3 id="demo2" style="color: rgb(0, 0, 0);"></h3>
+                <h3 id="demo3" style="color: rgb(0, 0, 0);"></h3>
+                <h3 id="demo4" style="color: rgb(0, 0, 0);"></h3>
+            </div>
+
+            <div class="container" style="padding: 2px; background-color: rgba(170, 211, 188, 0.185);">
+                <h2>Converta e estilize o professor!</h2><h3 style="color: rgb(77, 77, 77);">clicando num estilo ->>>>></h3>
+            </div>
+
+        </div>
+        <div class="container">
+            <div class="containerExtra">
+                <div onclick="brega()" class="containerFigurinha"><img id="fig" onclick="brega()" src="image/brega.jpg" alt=""></div>
+                <div class="containerFigurinha"><img id="fig" onclick="estilo()" src="image/estilo.jpg" alt=""></div>
+                <div class="containerFigurinha"><img id="fig" onclick="coelho()" src="image/coelho.jpg" alt=""></div>
+                <div class="containerFigurinha"><img id="fig" onclick="comida()" src="image/comida.jpg" alt=""></div>
+                <div class="containerFigurinha"><img id="fig" onclick="dog()" src="image/dog.jpg" alt=""></div>
+                <div class="containerFigurinha"><img id="fig" onclick="laco()" src="image/laco.jpg" alt=""></div>
+            </div>
+            <div id="div_inner">
+                <div id="contn" style="background-size: cover;
+    background-image: url(image/Rectangle\ 1.png);"></div>
+            </div>
+        </div>
+
+    </div>
+        
+</body>
+
+</html>
+<script>
+
+    function converter() {
+            var decimal = Number(demo1.value);
+            var tipo = select_tipo.value;
+
+            if (tipo == "Octal"){
+                demo2.innerHTML = decimal.toString(8);
+                demo3.innerHTML = ``;
+                demo4.innerHTML = ``;
+            }else if (tipo == "Hexadecimal"){
+                demo3.innerHTML = decimal.toString(16);
+                demo2.innerHTML = ``;
+                demo4.innerHTML = ``;
+            }else if (tipo == "Binário"){
+                demo4.innerHTML = decimal.toString(2);
+                demo3.innerHTML = ``;
+                demo2.innerHTML = ``;
+            }
+        }
+
+    function brega(){
+        div_inner.innerHTML = `<div id="contn" style="background-size: cover;
+    background-image: url(image/pbrega.gif);"></div>`;
+    }
+    function coelho(){
+        div_inner.innerHTML = `<div id="contn" style="background-size: cover;
+    background-image: url(image/pcoelho.gif);"></div>`;
+    }
+    function dog(){
+        div_inner.innerHTML = `<div id="contn" style="background-size: cover;
+    background-image: url(image/pdog.gif);"></div>`;
+    }
+    function estilo(){
+        div_inner.innerHTML = `<div id="contn" style="background-size: cover;
+    background-image: url(image/pestilo.gif);"></div>`;
+    }
+    function laco(){
+        div_inner.innerHTML = `<div id="contn" style="background-size: cover;
+    background-image: url(image/placo.gif);"></div>`;
+    }
+    function comida(){
+        div_inner.innerHTML = `<div id="contn" style="background-size: cover;
+    background-image: url(image/pcomida.jpg);"></div>`;
+    }
+</script>
