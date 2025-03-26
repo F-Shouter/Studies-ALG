@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Nome: <input type="text" id="input_nome"><br>
+    Altura (m): <input type="text" id="input_altura"><br>
+    Idade: <input type="text" id="input_idade"><br>
+    Acompanhante: 
+    <select id="select_acompanhante">
+        <option>sim</option>
+        <option>não</option>
+    </select><br>
+    <button onclick="analisar()">Posso entrar?</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function analisar(){
+        var nome = input_nome.value;
+        var altura = Number(input_altura.value);
+        var idade = Number(input_idade.value);
+        var acompanhante = select_acompanhante.value;
+
+        if ((altura>=1.5) && (idade >=18 || acompanhante == "sim")){
+            div_mensagem.innerHTML = `Entre!`
+        }else {div_mensagem.innerHTML = `Não entre!`}
+    }
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Tipo de passagem:
+    <select id="select_tipo">
+        <option>Comum</option>
+        <option>Estudante</option>
+        <option>Idoso/PNE</option>
+    </select><br>
+    Passagem: 
+    <select id="select_passagem">
+        <option>Única</option>
+        <option>Integração</option>
+    </select>
+    <button onclick="avaliar()">Simular preço</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function avaliar(){
+        var tipo = select_tipo.value;
+        var passagem = select_passagem.value;
+        if (tipo=="Comum" && passagem=="Única"){
+            div_mensagem.innerHTML = `Valor da passagem escolhida: R$4.4`;
+        }else if (tipo=="Comum" && passagem=="Integração"){
+            div_mensagem.innerHTML = `Valor da passagem escolhida: R$5.9`;
+        }else if (tipo=="Estudante" && passagem=="Única"){
+            div_mensagem.innerHTML = `Valor da passagem escolhida: R$${4.4/2}`;
+        }else if (tipo=="Estudante" && passagem=="Integração"){
+            div_mensagem.innerHTML = `Valor da passagem escolhida: R$${5.9/2}`;
+        }else {
+            div_mensagem.innerHTML = `Valor da passagem escolhida: R$0`
+        }
+    }
+</script>

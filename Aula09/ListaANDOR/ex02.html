@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Tamanho de tela:
+    <input type="text" id="input_tamanho"><br>
+    Cor: 
+    <select id="select_cor">
+        <option>Preto</option>
+        <option>Prata</option>
+        <option>Azul</option>
+        <option>Vermelho</option>
+    </select>
+    <button onclick="avaliar()">Será que ele gosta?</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function avaliar(){
+        var tamanho = Number(input_tamanho.value);
+        var cor = select_cor.value;
+        if (tamanho>6.5 && (cor=="Preto" || cor=="Prata")){
+            div_mensagem.innerHTML="😁";
+        }else {div_mensagem.innerHTML="😥";}
+    }
+</script>
