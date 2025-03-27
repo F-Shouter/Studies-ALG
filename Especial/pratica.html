@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Valor do salário:
+    <input type="text" id="input_salario"><br>
+
+    Adicional mensal:
+    <input type="text" id="input_adicional"><br>
+
+    Bônus:
+    <input type="text" id="input_bonus"><br><br>
+
+    <button onclick="analisar()">Analisar Minha Renda</button><br><br>
+
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+    function analisar(){
+
+    var salario = Number(input_salario.value);
+    var adicional = Number(input_adicional.value);
+    var bonus = Number(input_bonus.value); 
+    var bruto = salario + adicional + bonus;
+    var liquido = 0;
+    var ir = 0;
+    var inss = 0;
+    var fgts = 0;
+
+    if (bruto >= 10000){
+        ir = bruto * 0.125;
+    }else {ir = 0}
+
+    inss = (bruto - ir) * 0.1;
+    fgts = (bruto - ir) * 0.08;
+    liquido = bruto - (inss + fgts);
+    
+    div_mensagem.innerHTML = `
+        <br> <b>ANÁLISE DA SUA RENDA</b><br><br> 
+        Com o salário de R$<b>${salario}</b>,<br> com adicional de R$<b>${adicional}</b><br>e bônus de R$<b>${bonus}</b>, você tem:<br><br> 
+            Bruto: R$<b>${bruto}</b><br> 
+            IR: R$<b>${ir}</b><br>  
+            INSS: R$<b>${inss}</b><br>  
+            FGTS: R$<b>${fgts}</b><br> 
+            Líquido: R$<b>${liquido}</b><br>
+    `;
+
+    if (liquido > 2500){
+        div_mensagem.innerHTML += `
+            <br> Com a renda de R$<b>${liquido}</b>, é recomendado poupar R$<b>${liquido * 0.15}</b>,<br>para que em um ano tenha poupado R$<b>${(liquido * 0.15) * 12}</b><br>
+        `;
+    }else {
+        div_mensagem.innerHTML += `
+            <br> Com a renda de R$<b>${liquido}</b>, é recomendado obter renda extra para realizar uma poupança.<br>
+        `;
+    }
+
+    }
+</script>
