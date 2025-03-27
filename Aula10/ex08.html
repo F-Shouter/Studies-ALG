@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Número: 
+    <input type="text" id="input_num"><br>
+    
+    Frase: 
+    <input type="text" id="input_frase"><br>
+
+    <button onclick="contar()">Papagaio</button><br>
+
+</body>
+</html>
+<script>
+    function contar(){
+        var num = Number(input_num.value);
+        var frase = input_frase.value;
+        var count = 0;
+
+            while (count < num){
+            count = count + 1;
+            alert(frase);
+                       
+        }
+        
+        
+    }
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tabuada</h1><br>
+    <select id="select_num">
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+
+    <h2>Ver até número:</h2>
+    <input type="text" id="input_num"><br><br>
+
+    <button onclick="contar()">Ver tabuada</button><br>
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+    function contar(){
+        var select = Number(select_num.value);
+        var num = Number(input_num.value);
+        var count = 0;
+
+        while (count < num){
+        count = count + 1;
+        div_mensagem.innerHTML += `Carro dando a ${count}ª volta  <br>`;                        
+        }div_mensagem.innerHTML += `<br>Corrida finalizada!`; 
+        
+        
+    }
+</script>
