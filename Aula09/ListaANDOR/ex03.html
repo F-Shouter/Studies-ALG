@@ -25,16 +25,14 @@
     function avaliar(){
         var tipo = select_tipo.value;
         var passagem = select_passagem.value;
-        if (tipo=="Comum" && passagem=="Única"){
-            div_mensagem.innerHTML = `Valor da passagem escolhida: R$4.4`;
-        }else if (tipo=="Comum" && passagem=="Integração"){
-            div_mensagem.innerHTML = `Valor da passagem escolhida: R$5.9`;
-        }else if (tipo=="Estudante" && passagem=="Única"){
-            div_mensagem.innerHTML = `Valor da passagem escolhida: R$${4.4/2}`;
-        }else if (tipo=="Estudante" && passagem=="Integração"){
-            div_mensagem.innerHTML = `Valor da passagem escolhida: R$${5.9/2}`;
-        }else {
-            div_mensagem.innerHTML = `Valor da passagem escolhida: R$0`
+        var preco = 0;
+        if ( (tipo == "Comum" || tipo == "Estudante") && passagem == "Única"){
+            if (tipo == "Comum"){preco = 4.4;}
+            else {preco = 4.4/2;}
+        }else if ((tipo == "Comum" || tipo == "Estudante") && passagem == "Integração"){
+            if (tipo == "Comum"){preco = 5.9;}
+            else {preco = 5.9/2;}            
         }
+        div_mensagem.innerHTML = "Valor da passagem escolhida: R$" + preco;
     }
-</script>
+</script> 

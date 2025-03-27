@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body id="body_mensagem">
     E-mail:
     <input type="text" id="input_email"><br>
     Senha: 
@@ -21,13 +21,28 @@
 </body>
 </html>
 <script>
+    var tentativa = 3;
+    var count = 0;
     function autenticar(){
         var email = input_email.value;
         var senha = input_senha.value;
         var select = select_informacao.value;
         var informacao = input_informacao.value;
-        if ((email=="ana" && senha=="braga") && ((select=="Ano de nascimento" && informacao=="1949") || (select=="Nome do animal" && informacao=="louro josé"))){
-            div_mensagem.innerHTML = "Usuário autenticado";
-        }else {div_mensagem.innerHTML = "Falha na autenticação";}
-    }
+        
+
+        if ((email=="ana" && senha=="braga") && 
+            ((select=="Ano de nascimento" && informacao=="1949") || 
+            (select=="Nome do animal" && informacao=="louro josé")))
+                {div_mensagem.innerHTML = "Usuário autenticado";
+                count = 0;
+        
+        }else if (count<tentativa && count!=tentativa){
+            count += 1;          
+            div_mensagem.innerHTML = `<p style="color: red;">Falha na autenticação<br>VOCÊ TEM ${4-count} TENTATIVA(S)</p></>`;
+
+        }else {
+            body_mensagem.innerHTML = `<p style="color: red;">Usuário BLOQUEADO! Procure seu gerente! <br></p>`;
+        }
+        }
+    
 </script>
