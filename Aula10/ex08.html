@@ -21,11 +21,16 @@
         var num = Number(input_num.value);
         var frase = input_frase.value;
         var count = 0;
+        var mensagem = '';
 
             while (count < num){
+                count = count + 1;
+                mensagem = mensagem + "\n" + frase;
+            }
+
+            while (count < 2*num){
             count = count + 1;
-            alert(frase);
-                       
+            alert(mensagem);       
         }
         
         

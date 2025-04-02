@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Tabuada</h1><br>
+    <h1>Tabuada</h1>
     <select id="select_num">
         <option value="2">2</option>
         <option value="3">3</option>
@@ -34,8 +34,13 @@
 
         while (count < num){
         count = count + 1;
-        div_mensagem.innerHTML += `Carro dando a ${count}ª volta  <br>`;                        
-        }div_mensagem.innerHTML += `<br>Corrida finalizada!`; 
+        if (count%2==0){
+            div_mensagem.innerHTML +=`<b style="color:blue;"> ${select} X ${count} = ${select * count}<br></b>`;
+        }else {
+            div_mensagem.innerHTML +=`<b style="color:red;"> ${select} X ${count} = ${select * count}<br></b>`;
+        }
+                                
+        } 
         
         
     }
