@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1, h2, h3, h4, p{
+            margin: 0;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            position: fixed; 
+            font-family: 'Courier New', Courier, monospace;
+            background-color: rgb(228, 226, 199);
+        }
+        .div_form {
+            width: 30vw;
+            height: 83vh;
+            margin: 1%;
+            padding: 2%; 
+            border: 1px solid white;
+            background-color: rgb(255, 255, 255);
+        }
+        #div_extrato {
+            text-align: right;
+            width: 56.5vw;
+            height: 83vh;
+            margin: 1%;
+            display: block;
+            background-color: rgb(255, 255, 255);
+            overflow-y: auto; /* Habilita o scroll vertical */
+            max-height: 89vh; /* Define um limite de altura */
+            padding: 2%; /* Para evitar que o conteúdo fique colado na borda */
+        }
+        #div_mensagem_invalidez {
+            font-size: 10px;
+            color: red;
+            margin: 0;
+            text-align: center;
+        }
+        .div_center {
+            text-align: center;
+        }
+        .button_verificar {
+            display: block; 
+            margin: 0 auto;
+        }
+        button {
+            width: 170px;
+            background-color: black;
+            color: white;
+        }
+        span {
+            color: gray;
+        }
+        input {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }  
+        img {
+            height: 30px;
+        }       
+    </style>
+</head>
+<body>
+    <div class="div_form">
+        <div class="div_center">
+            <h1>Doceria Gourmet</h1>
+            <h2>Faça seu pedido!</h2>            
+        </div><br>
+        <div id="div_mensagem_invalidez"></div>
+        <hr>
+
+        <h3>🥯Macarons</h3>
+        <input type="text" id="input_qtdM" placeholder="quantidade"><br>
+        <input type="text" id="input_precoM" placeholder="preço unitário"><br><br>
+
+        <h3>🧆Brigadeiros Gourmets</h3>
+        <input type="text" id="input_qtdB" placeholder="quantidade"><br>
+        <input type="text" id="input_precoB" placeholder="preço unitário"><br><br>
+
+        <h3>🧁Cupcakes</h3>
+        <input type="text" id="input_qtdCp" placeholder="quantidade"><br>
+        <input type="text" id="input_precoCp" placeholder="preço unitário"><br><br>
+
+        <h3>🥧Cheesecakes</h3>
+        <input type="text" id="input_qtdCs" placeholder="quantidade"><br>
+        <input type="text" id="input_precoCs" placeholder="preço unitário"><br><br>
+
+        <hr><br>
+        <button class="button_verificar" onclick="verificar()">Verificar Vendas</button>
+    </div>
+
+        <div id="div_extrato">
+            <div class="div_center">
+                <h1>Extrato</h1><hr>
+            </div>
+        </div> 
+</body>
+</html>
+<script>
+    function verificar(){
+
+        div_extrato.innerHTML = "";
+
+        // Variáveis quantidade e preço 
+        var qtdM = Number(input_qtdM.value);
+        var precoM = Number(input_precoM.value);
+        var qtdB = Number(input_qtdB.value);
+        var precoB = Number(input_precoB.value);
+        var qtdCp = Number(input_qtdCp.value);
+        var precoCp = Number(input_precoCp.value);
+        var qtdCs = Number(input_qtdCs.value);
+        var precoCs = Number(input_precoCs.value);
+
+        // Outras variáveis 
+        var totalPreco = (qtdM*precoM) + (qtdB*precoB) + (qtdCp*precoCp) + (qtdCs*precoCs);
+        var qtdVenda = qtdM + qtdB + qtdCp + qtdCs;
+        var countLista = 0;
+        var mensagem_invalidez = `<h3>Valores informados inválidos!!!!!</h3>`;
+        var extrato = "";
+        var final_extrato = `
+                    <h4>Com a quantidade de ${qtdM} Macarons, ${qtdB} Brigadeiros, ${qtdCp} Cupcakes e ${qtdCs} Cheesecakes,</h4> <hr> <h3><b>A venda totalizará R$${totalPreco}</b></h3>
+               `;
+
+        if (
+            (qtdM >= 0) &&
+            (precoM >= 0) &&
+            (qtdB >= 0) &&
+            (precoB >= 0) &&
+            (qtdCp >= 0) &&
+            (precoCp >= 0) &&
+            (qtdCs >= 0) &&
+            (precoCs >= 0)
+        ){
+            while (countLista < qtdVenda){
+                
+                // Venda de Macaron
+                if (qtdM > 0){
+                    while (qtdM > 0){
+                        countLista = countLista + 1;
+                        extrato += `<p>NÚMERO DA VENDA ${countLista} - 🥯 - - - - - - - - - - - - - - -  VALOR UNITÁRIO: R$${precoM}</p><br>`;
+                        qtdM = qtdM - 1;
+                    }                 
+                }
+                // Venda de Brigadeiro
+                if (qtdB > 0){
+                    while (qtdB > 0){
+                        countLista = countLista + 1;
+                        extrato += `<p>NÚMERO DA VENDA ${countLista} - 🧆 - - - - - - - - - - - - - - -  VALOR UNITÁRIO: R$${precoB}</p><br>`;
+                        qtdB = qtdB - 1;
+                    }                 
+                }
+                // Venda de Cupcake
+                if (qtdCp > 0){
+                    while (qtdCp > 0){
+                        countLista = countLista + 1;
+                        extrato += `<p>NÚMERO DA VENDA ${countLista} - 🧁 - - - - - - - - - - - - - - -  VALOR UNITÁRIO: R$${precoCp}</p><br>`;
+                        qtdCp = qtdCp - 1;
+                    }                 
+                }
+                // Venda de Chessecake
+                if (qtdCs > 0){
+                    while (qtdCs > 0){
+                        countLista = countLista + 1;
+                        extrato += `<p>NÚMERO DA VENDA ${countLista} - 🥧 - - - - - - - - - - - - - - -  VALOR UNITÁRIO: R$${precoCs}</p><br>`;
+                        qtdCs = qtdCs - 1;
+                    }                 
+                }
+               div_extrato.innerHTML += `${extrato}`;
+               div_extrato.innerHTML += `<br>${final_extrato}`;
+            }
+            
+
+        }else {div_mensagem_invalidez.innerHTML = `${mensagem_invalidez}`;}
+    }
+</script>

@@ -4,24 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+            display: flex;
+        }
+    </style>
 </head>
 <body>
-    <h1>Tabuada</h1>
-    <select id="select_num">
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-    </select>
+    <div>
+        Tabuada
+        <select id="select_num">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        Ver até número:
+        <input type="text" id="input_num">
+    </div>
 
-    <h2>Ver até número:</h2>
-    <input type="text" id="input_num"><br><br>
-
-    <button onclick="contar()">Ver tabuada</button><br>
+    <button onclick="contar()">Ver tabuada</button><br><br>
     <div id="div_mensagem"></div>
 
 </body>
@@ -29,19 +35,16 @@
 <script>
     function contar(){
         var select = Number(select_num.value);
-        var num = Number(input_num.value);
+        var num = Number(input_num.value) + 1;
         var count = 0;
 
         while (count < num){
+            if (count%2==0){
+                div_mensagem.innerHTML +=`<b style="color:blue;"> ${select} X ${count} = ${select * count}<br></b>`;
+            }else {
+                div_mensagem.innerHTML +=`<b style="color:red;"> ${select} X ${count} = ${select * count}<br></b>`;
+            }
         count = count + 1;
-        if (count%2==0){
-            div_mensagem.innerHTML +=`<b style="color:blue;"> ${select} X ${count} = ${select * count}<br></b>`;
-        }else {
-            div_mensagem.innerHTML +=`<b style="color:red;"> ${select} X ${count} = ${select * count}<br></b>`;
-        }
-                                
-        } 
-        
-        
+        }  
     }
 </script>
