@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>É tri/penta!</h1>
+    num1:
+    <input type="text" id="input_num1" /><br /><br />
+
+    num2:
+    <input type="text" id="input_num2" /><br /><br />
+
+    <button onclick="calcular()">Curto 3 e 5!</button><br />
+
+    <div id="div_mensagem"></div>
+  </body>
+</html>
+<script>
+  function calcular() {
+    var num1 = Number(input_num1.value);
+    var num2 = Number(input_num2.value);
+    var mensagem = "";
+
+    while (num1 < num2 + 1) {
+      if ((num1%3==0) && (num1%5==0)) {
+        mensagem += `<br><b>É TRI! É PENTA!</b>`;
+
+      } else if (num1 % 5 == 0) {
+        mensagem += `<br><b>É PENTA</b>!`;
+
+      } else if (num1%3==0){
+        mensagem += `<br><b>É TRI!</b>`;
+
+      }else {
+        mensagem += `<br>${num1}`;
+      }
+
+      num1++;
+    }
+    div_mensagem.innerHTML = mensagem;
+  }
+</script>

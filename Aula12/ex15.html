@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    
+    <h1>Um elefante, incomoda muita gente...</h1>
+    Quantidade de elefantes:
+    <input type="text" id="input_qtd" /><br /><br />
+    <button onclick="atazanar()">Atazanar a médium</button><br /><br />
+    <div id="div_mensagem"></div>
+
+  </body>
+</html>
+<script>
+  function atazanar() {
+
+    var qtd = Number(input_qtd.value);
+    var count = 1;
+    var mensagem = " ";
+    var incomodam = "incomodam,";
+    var countI = count;
+
+    while (count < qtd) {
+      count++;
+      mensagem += `1 elefante incomoda muita gente!<br>`;
+      mensagem += `${count} elefantes, `;
+      while (countI > 0) {
+        countI--;
+        incomodam += ` incomodam,`;
+      }
+      countI++;
+      mensagem += ` ${incomodam} muito mais!<br>`;
+    }
+    div_mensagem.innerHTML = mensagem;
+  }
+</script>

@@ -10,13 +10,14 @@
         }
 
         body {
+            display: flex;
+            flex-direction: row;
             width: 100vw;
             height: 100vh;
-            display: flex;
-            position: fixed; 
             font-family: 'Courier New', Courier, monospace;
             background-color: rgb(228, 226, 199);
         }
+
         .div_form {
             width: 30vw;
             height: 83vh;
@@ -25,6 +26,7 @@
             border: 1px solid white;
             background-color: rgb(255, 255, 255);
         }
+
         #div_extrato {
             text-align: right;
             width: 56.5vw;
@@ -36,34 +38,56 @@
             max-height: 89vh; /* Define um limite de altura */
             padding: 2%; /* Para evitar que o conteúdo fique colado na borda */
         }
+
         #div_mensagem_invalidez {
             font-size: 10px;
             color: red;
             margin: 0;
             text-align: center;
         }
+
         .div_center {
             text-align: center;
         }
+
         .button_verificar {
             display: block; 
             margin: 0 auto;
         }
+
         button {
             width: 170px;
             background-color: black;
             color: white;
         }
+
         span {
             color: gray;
         }
+
         input {
             text-align: center;
             font-family: 'Courier New', Courier, monospace;
         }  
+
         img {
             height: 30px;
-        }       
+        }
+
+        @media screen and (max-width: 768px) {
+            body {
+                flex-direction: column; /* Empilha os elementos em telas pequenas */
+                height: auto;
+            }
+            .div_form, #div_extrato {
+                width: 90vw;
+                height: auto;
+                margin: 5%;
+            }
+            button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -105,7 +129,11 @@
 <script>
     function verificar(){
 
-        div_extrato.innerHTML = "";
+        div_extrato.innerHTML = `
+            <div class="div_center">
+                <h1>Extrato</h1><hr>
+            </div>
+        `;
 
         // Variáveis quantidade e preço 
         var qtdM = Number(input_qtdM.value);
