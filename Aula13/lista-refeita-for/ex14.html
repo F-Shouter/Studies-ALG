@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Treino de Musculação</h1>
+    De quantos em quantos dias faz musculação:
+    <input type="text" id="input_dia"><br><br>
+
+    <button onclick="exibir()">Exibir rotina mensal</button><br><br>
+
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function exibir(){
+        var dia = Number(input_dia.value);
+        var mensagem = "";
+        for (var count = 1; count <= 30; count ++){
+            mensagem += `Dia ${count} - Musculação<br>`;
+            for (var repeticao = dia - 1; (count <=30 && repeticao > 0); repeticao --){
+                count ++;
+                mensagem += `Dia ${count} - Comer, dormir etc<br>`;
+            }
+        }
+        div_mensagem.innerHTML = `${mensagem}`;
+    }
+</script>

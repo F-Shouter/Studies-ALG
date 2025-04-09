@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Ínicio: 
+    <input type="text" id="input_num1"><br>
+    
+    Fim: 
+    <input type="text" id="input_num2"><br>
+
+    <button onclick="contar()">S2 Pares</button><br>
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+    function contar(){
+        var num1 = Number(input_num1.value);
+        var num2 = Number(input_num2.value);
+            for (var count = num1; count < num2; count = count + 1){
+                if (count%2 == 0){
+                    div_mensagem.innerHTML += `${count}<br>`;
+                }       
+        }
+    }
+</script>

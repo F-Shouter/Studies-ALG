@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="contar()">Diga algo sobre a matéria de Algoritmos</button><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function contar(){
+        for (var count = 1; count <= 7; count ++){
+            div_mensagem.innerHTML += `${count} LEGAL!!!! <br><br>`;
+        }
+    }
+</script>
