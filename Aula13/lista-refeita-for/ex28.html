@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Quantos depósitos fez no banco?</h3>
+    <input type="text" id="input_qtd"><br>
+
+    <h3>Valor de cada depósito?</h3>
+    <input type="text" id="input_valor">
+
+    <button onclick="acompanhar()">Acompanhar grana</button><br><br> 
+    <div id="div_mensagem"></div> 
+</body>
+</html>
+<script>
+    function acompanhar(){
+        var qtd = Number(input_qtd.value);
+        var valor = Number(input_valor.value);
+        var mensagem = "";
+        var total = 0;
+
+        for (var count = 1; count <= qtd; count++){
+            if (count%3 == 0){
+                total = (total + valor) * 1.01;
+                mensagem += `${count}º Mês: R$ ${total}⭐<br>`;
+            }else {
+                total = total + valor;
+                mensagem += `${count}º Mês: R$ ${total}<br>`;
+            }
+        }
+        div_mensagem.innerHTML = `${mensagem}<br>`;
+        div_mensagem.innerHTML += `Total guardado: R$ ${total}`;
+        
+    }
+</script>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="ver()">FizzBuzz</button><br><br> 
+    <div id="div_mensagem"></div> 
+</body>
+</html>
+<script>
+    function ver(){
+        var mensagem = "";
+        for (var count = 1; count <= 100; count++){
+            if ((count%3 == 0) && (count%5 == 0)){
+                mensagem += `FizzBuzz<br>`;
+            }else if (count%5 == 0){
+                mensagem += `Buzz<br>`;
+            }else if (count%3 == 0){
+                mensagem += `Fizz<br>`;
+            }else {mensagem += `${count}<br>`;}
+        }
+        div_mensagem.innerHTML = `${mensagem}`;
+    }
+</script>

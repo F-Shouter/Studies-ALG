@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Quantos anos você têm?</h3>
+    <input type="text" id="input_idade" oninput="mostrarFases()"><br><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function mostrarFases(){
+        var idade = Number(input_idade.value);
+        var mensagem = "";
+        for (var count = 0; count <= idade; count++){
+            if (count>=0 && count<=4){
+                mensagem += `${count} anos (Primeira Infância)<br>`; 
+            }else if (count <= 6){
+                mensagem += `${count} anos (Pré-escolar)<br>`; 
+            }else if (count <= 10){
+                mensagem += `${count} anos (Segunda Infância)<br>`; 
+            }else if (count <= 18){
+                mensagem += `${count} anos (Adolescência)<br>`; 
+            }else if (count <= 50){
+                mensagem += `${count} anos (Adulto)<br>`; 
+            }else if (count <= 100){
+                mensagem += `${count} anos (Melhor idade)<br>`; 
+            }else {
+                mensagem += `${count} anos (Matusalém)<br>`;
+            }
+        }
+        div_mensagem.innerHTML = `${mensagem}`;
+    }
+</script>

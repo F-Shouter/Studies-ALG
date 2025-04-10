@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Informe quantas xícaras de café com leite você acha que já bebeu na vida</h3>
+    <input type="text" id="input_num"><br><br>
+    <button onclick="ver()">Ver a quantidade</button><br><br> 
+    <div id="div_mensagem"></div> 
+</body>
+</html>
+<script>
+    function ver(){
+        var num = Number(input_num.value);
+        var mensagem = "";
+        var frase = "";
+        var frase2 = "";
+        for (var count = 1; count <= num; count++){
+            frase += "🥄";
+            frase2 += "☕☕";
+        }
+        mensagem = `${frase + frase2}`;
+        div_mensagem.innerHTML = `${mensagem}`;
+    }
+</script>
