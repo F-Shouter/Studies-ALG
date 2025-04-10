@@ -7,17 +7,16 @@
 </head>
 <body>
     <h3>Informe quantas "Coca-Cola" você acha que já bebeu na vida</h3>
-    <input type="text" id="input_num"><br><br>
-    <button onclick="ver()">Ver a quantidade</button><br><br> 
+    <input type="text" id="input_num" oninput="ver()"><br><br>
+    <!-- <button onclick="ver()">Ver a quantidade</button><br><br> -->
     <div id="div_mensagem"></div> 
 </body>
-</html>
 <script>
     function ver(){
         var num = Number(input_num.value);
         var mensagem = "";
         for (var count = 1; count <= num; count++){
-            mensagem += "🥤";
+            mensagem += `<img style="width: 20px; 100px;" src="image/coca.webp" alt="">`;
         }
         div_mensagem.innerHTML = `${mensagem}`;
     }

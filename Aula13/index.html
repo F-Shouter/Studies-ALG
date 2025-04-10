@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="contar()">contar</button><br /><br />
+    <div id="div_mensagem"></div>
+  </body>
+</html>
+<script>
+//   function contar() {
+//     var resposta = prompt("Continuar?");
+//     for (var count = 0; resposta == "sim" && count < 10; count++) {
+//       div_mensagem.innerHTML += `${count}<br>`;
+//       resposta = prompt("continuar?");
+//     }
+//   }
+  function contar() {
+    var resposta = confirm("Continuar?");
+    for (var count = 0; resposta && count < 10; count++) {
+      div_mensagem.innerHTML += `${count}<br>`;
+      resposta = confirm(`${count}\n` + "continuar?");
+    }
+  }
+</script>
