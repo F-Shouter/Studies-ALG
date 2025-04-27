@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="input_min" placeholder="min"><br>
+    <input type="text" id="input_max" placeholder="max">
+    <button onclick="gerar()">clique</button><br><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function gerar(){
+        var num = Math.random(); // de 0 a 1
+        var mensagem = ``;
+        var min = Number(input_min.value);
+        var max = Number(input_max.value);
+        var intervalo = max - min;
+
+        mensagem = `${num * intervalo + min}`;
+        mensagem = Number(mensagem).toFixed(0);
+
+        // // FORMÚLA = Aleatório * Intervalo + NumMínimo
+        // // Números de estremidades têm menos chances com toFixed
+        
+        // Números aleatórios pseudoaleatório
+        // var num = Math.random()*100; // de 0 a 100
+        // var num = Math.random()*10 + 10; // de 10 a 20
+        // var num = Math.random()*5 + 25; // de 25 a 30
+
+        //parseint formula = Aleatorio * (intervalo + 1) + min
+        // ou Math.floor
+
+        parseInt(num)
+        Math.floor(num)
+        
+
+        div_mensagem.innerHTML = `${mensagem}`;
+        
+    }
+</script>
