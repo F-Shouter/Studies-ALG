@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <button onclick="avaliar()">Avaliar</button><br /><br />
+    <div id="div_mensagem"></div>
+    <br /><br />
+
+  </body>
+</html>
+<script>
+
+  function avaliar() {
+    var nota = Math.random() * 5;
+    var mensagem = ``;
+    var emoji = ``;
+
+    nota = nota.toFixed(1);
+    mensagem = nota;
+
+    if (nota>=0 && nota<0.5){emoji = `😥`}
+    else if (nota>=0.5 && nota<1.5){emoji = `🙁`}
+    else if (nota>=1.5 && nota<3.5){emoji = `😐`}
+    else if (nota>=3.5 && nota<4.5){emoji = `😃`}
+    else {emoji = `🤩`}
+
+    div_mensagem.innerHTML = `
+        Nota recebida: ${mensagem} ${emoji}
+    `;
+  }
+</script>
