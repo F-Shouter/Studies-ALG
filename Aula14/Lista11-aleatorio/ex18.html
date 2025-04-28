@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    Jogador 1: <span id="span_jogador1">0</span><br>
+    Jogador 2: <span id="span_jogador2">0</span><br>
+    Empate: <span id="span_empate">0</span><br><br>
+
+    <button onclick="jogar()">Jogar</button><br /><br />
+    <div id="div_mensagem"></div>
+
+  </body>
+</html>
+<script>
+
+    var count_jogador1 = 0;
+    var count_jogador2 = 0;
+    var count_empate = 0;
+
+  function jogar() {
+      var num1 = Math.random() * 6 + 1;
+      var num2 = Math.random() * 6 + 1;
+      var mensagem = ``;
+
+    num1 = Math.floor(num1);
+    num2 = Math.floor(num2);
+
+    if (num1 > num2){
+        count_jogador1 ++;
+    }else if (num2 > num1){
+        count_jogador2 ++;
+    }else if (num1 == num2){
+        count_empate ++;
+    }
+
+    if (count_jogador1 > count_jogador2){
+        mensagem = `O jogador 1 está vencendo!`;
+    }else if (count_jogador2 > count_jogador1){
+        mensagem = `O jogador 2 está vencendo!`;
+    }else if (count_jogador1 == count_jogador2){
+        mensagem = `O jogo está empatado!`;
+    }
+
+    span_jogador1.innerHTML = count_jogador1;
+    span_jogador2.innerHTML = count_jogador2;
+
+    div_mensagem.innerHTML = `
+        Número do jogador 1: <b>${num1}</b><br>
+        Número do jogador 2: <b>${num2}</b><br><hr>
+        <b>${mensagem}</b><br>
+    `;
+  }
+</script>
