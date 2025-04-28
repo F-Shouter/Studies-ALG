@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <button onclick="notear()">Gerar uma nota de aluno entre 0 e 10</button
+    ><br /><br />
+    <div id="div_mensagem_nota"></div>
+    <br /><br />
+
+    <button onclick="frequenciar()">
+      Gerar uma frequência de aluno entre 0 e 100</button
+    ><br /><br />
+    <div id="div_mensagem_freq"></div>
+    <br /><br />
+
+    <button onclick="verificar()">Ver Situação</button><br /><br />
+    
+  </body>
+</html>
+<script>
+
+  var nota = Math.random() * 10;
+  nota = nota.toFixed(2);
+  var freq = Math.random() * 100;
+  freq = freq.toFixed(2);
+
+  function notear() {
+    // var nota = Math.random() * 10;
+    // nota = nota.toFixed(2);
+    var mensagem = ``;
+    mensagem = nota;
+    div_mensagem_nota.innerHTML = mensagem;
+  }
+
+  function frequenciar() {
+    // var freq = Math.random() * 100;
+    // freq = freq.toFixed(2);
+    var mensagem = ``;
+    mensagem = freq;
+    div_mensagem_freq.innerHTML = mensagem;
+  }
+
+  function verificar() {
+    alert(`Aluno com:\n Nota: ${nota}\n Frequência: ${freq}`);
+  }
+</script>
