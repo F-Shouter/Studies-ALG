@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+   Nome: <input id="input_nome" type="text"><br>
+   Número 1 da sorte (inteiro de 1 até 100): <input id="input_num1" type="number">
+   Número 2 da sorte (inteiro de 1 até 100): <input id="input_num2" type="number">
+   Número 3 da sorte (inteiro de 1 até 100): <input id="input_num3" type="number">
+
+    <button onclick="sortear()">Sortear</button><br /><br />
+    <div id="div_mensagem"></div>
+
+  </body>
+</html>
+<script>
+
+    var count = 1;
+
+  function sortear() {
+    var nome = input_nome.value;
+    var num1 = Number(input_num1.value);
+    var num2 = Number(input_num2.value);
+    var num3 = Number(input_num3.value);
+    var mensagem = ``;
+    var sorteio = Math.random() * 100 + 1;
+
+    sorteio = Math.floor(sorteio);
+
+    if ((num1<1 && num1>100) && (num2<1 && num2>100) && (num3<1 && num3>100)){
+        alert(`ERRO`);
+    }else {
+        mensagem = `
+        Tentativa: ${count}<br>
+        Seus números: ${num1}, ${num2}, ${num3} <br>
+        <b>Número sorteado: ${sorteio}</b><br><hr>
+    `;
+
+    if ((num1 == sorteio) || (num2 == sorteio) || (num3 == sorteio)){
+        mensagem += `
+            Parabéns, ${nome} você foi sorteado(a) após ${count} sorteios!
+        `;
+    }
+    div_mensagem.innerHTML += `
+        ${mensagem}<br>
+    `;
+
+    count ++;
+    
+    }
+
+    
+  }
+</script>
