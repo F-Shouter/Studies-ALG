@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <button onclick="avaliar()">Avaliar</button><br /><br />
+    <button onclick="verificar()">Verificar Média</button><br /><br />
+    <div id="div_mensagem"></div>
+    <br /><br />
+
+  </body>
+</html>
+<script>
+
+var soma_notas = 0;
+var mensagem = ``;
+var count = 0;
+
+  function avaliar() {
+    var nota = Math.random() * 5;
+    var emoji = ``;
+    nota = nota.toFixed(1);
+
+    if (nota>=0 && nota<0.5){emoji = `😥`}
+    else if (nota>=0.5 && nota<1.5){emoji = `🙁`}
+    else if (nota>=1.5 && nota<3.5){emoji = `😐`}
+    else if (nota>=3.5 && nota<4.5){emoji = `😃`}
+    else {emoji = `🤩`}
+
+    soma_notas = Number(soma_notas) + Number(nota);
+    soma_notas = soma_notas.toFixed(1);
+    count ++;
+
+    div_mensagem.innerHTML += `
+        Nota recebida: ${nota} ${emoji}<br>
+    `;
+
+    
+  }
+
+  function verificar(){
+    var media = soma_notas/count;
+    var emoji = ``;
+
+    media = media.toFixed(1)
+
+    if (media>=0 && media<0.5){emoji = `😥`}
+    else if (media>=0.5 && media<1.5){emoji = `🙁`}
+    else if (media>=1.5 && media<3.5){emoji = `😐`}
+    else if (media>=3.5 && media<4.5){emoji = `😃`}
+    else {emoji = `🤩`}
+    
+    div_mensagem.innerHTML += `
+        <hr>Média geral: ${media} ${emoji}<br><hr>
+    `;
+
+  }
+</script>
