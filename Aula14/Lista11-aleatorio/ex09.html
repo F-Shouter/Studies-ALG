@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="notear()">Gerar uma nota de aluno entre 3 e 10</button
+
+    ><br /><br />
+    <div id="div_mensagem_nota"></div>
+    <br /><br />
+
+    <button onclick="frequenciar()">
+      Gerar uma frequência de aluno entre 50 e 100</button
+    ><br /><br />
+    <div id="div_mensagem_freq"></div>
+    <br /><br />
+
+    <button onclick="verificar()">Ver Aprovação</button><br /><br />
+    <div id="div_mensagem"></div>
+    <br /><br />
+
+  </body>
+</html>
+<script>
+
+  var nota = Math.random() * 7 + 3;
+  nota = nota.toFixed(1);
+  var freq = Math.random() * 50 + 50;
+  freq = freq.toFixed(1);
+
+  function notear() {
+    // var nota = Math.random() * 10;
+    // nota = nota.toFixed(2);
+    var mensagem = ``;
+    mensagem = nota;
+    div_mensagem_nota.innerHTML = mensagem;
+  }
+
+  function frequenciar() {
+    // var freq = Math.random() * 100;
+    // freq = freq.toFixed(2);
+    var mensagem = ``;
+    mensagem = freq;
+    div_mensagem_freq.innerHTML = mensagem;
+  }
+
+  function verificar() {
+    var resultado = ``;
+
+    if (nota>=6 && freq>=75){
+        resultado = "aprovado"
+    }else {resultado = "reprovado"}
+    
+    div_mensagem.innerHTML = `Com nota ${nota} e frequência ${freq}, o aluno está ${resultado}!`;
+  }
+
+</script>
