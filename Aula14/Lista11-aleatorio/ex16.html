@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+   Nome: <input id="input_nome" type="text"><br>
+   Número da sorte (inteiro de 1 até 10): <input id="input_num" type="number">
+
+    <button onclick="sortear()">Sortear</button><br /><br />
+    <div id="div_mensagem"></div>
+
+  </body>
+</html>
+<script>
+
+    var count = 1;
+
+  function sortear() {
+    var nome = input_nome.value;
+    var num = Number(input_num.value);
+    var mensagem = ``;
+    var sorteio = Math.random() * 10 + 1;
+
+    sorteio = Math.floor(sorteio);
+
+    if (num<1 && num>10){
+        alert(`ERRO`);
+    }else {
+        mensagem = `
+        Tentativa: ${count}<br>
+        Seu número: ${num}<br>
+        Número sorteado: ${sorteio}<br><hr>
+    `;
+
+    if (num == sorteio){
+        mensagem += `
+            Parabéns, ${nome} você foi sorteado(a) após ${count} sorteios!
+        `;
+    }
+    div_mensagem.innerHTML += `
+        ${mensagem}<br>
+    `;
+
+    count ++;
+    
+    }
+
+    
+  }
+</script>
