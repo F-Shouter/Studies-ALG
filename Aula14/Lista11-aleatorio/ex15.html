@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    Números pares: <span id="span_par"></span><br>
+    Números ímpares: <span id="span_impar"></span><br><br>
+
+    <button onclick="ver()">Sortear número</button><br /><br />
+    <div id="div_mensagem"></div>
+
+  </body>
+</html>
+<script>
+
+    var count_par = 0;
+    var count_impar = 0;
+
+  function ver() {
+    var num = Math.random() * 23 -9;
+    var mensagem = ``;
+
+    num = Math.floor(num);
+
+    if (num%2 == 0){
+        count_par ++;
+    }else {count_impar ++;}
+
+    span_par.innerHTML = count_par;
+    span_impar.innerHTML = count_impar;
+
+    div_mensagem.innerHTML = `
+        ${num}<br>
+    `;
+  }
+</script>
