@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div_mensagem {
+            height: 100px;
+            width: 100px;
+            text-align: center;
+            align-content: center;
+            color: white;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="jogar()">jogar dado</button><br><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function jogar(){
+        var num = Math.random() * 20 + 1;
+        var mensagem = ``;
+
+        num = Math.floor(num);
+        mensagem = num;
+
+        div_mensagem.innerHTML = mensagem;
+    }
+</script>
