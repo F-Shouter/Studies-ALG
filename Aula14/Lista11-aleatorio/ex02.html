@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div_mensagem {
+            height: 150px;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="sortear()">Sortear time</button><br><br>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    function sortear(){
+        var num = Math.random() * 4 + 1;
+        var mensagem = ``;
+
+        num = Math.floor(num);
+
+        if (num == 1){
+            mensagem = `<img src="../image/flamengo.jpg" alt="">`;
+        } else if (num == 2){
+            mensagem = `<img src="../image/palmeiras.jpg" alt="">`;
+        }else if (num == 3){
+            mensagem = `<img src="../image/corinthians.jpg" alt="">`;
+        }else {
+            mensagem = `<img src="../image/saopaulo.jpg" alt="">`;
+        }
+
+        div_mensagem.innerHTML = `${num}`;
+        div_mensagem.innerHTML += `${mensagem}`;
+
+    }
+</script>
