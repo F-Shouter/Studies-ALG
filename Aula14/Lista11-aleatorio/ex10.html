@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="dedar1()">Dado Jogador 1</button><br /><br />
+    <div id="div_mensagem_dado1"></div>
+    <br /><br />
+
+    <button onclick="dedar2()">Dado Jogador 2</button><br /><br />
+    <div id="div_mensagem_dado2"></div>
+    <br /><br />
+
+    <button onclick="verificar()">Comparar Resultados</button><br /><br />
+    <div id="div_mensagem"></div>
+    <br /><br />
+
+  </body>
+</html>
+<script>
+
+  var dado1 = Math.random() * 6 + 1;
+  var dado2 = Math.random() * 6 + 1;
+
+  dado1 = Math.floor(dado1);
+  dado2 = Math.floor(dado2);
+
+  function dedar1() {
+    var mensagem = ``;
+    mensagem = dado1;
+    div_mensagem_dado1.innerHTML = mensagem;
+  }
+
+  function dedar2() {
+    var mensagem = ``;
+    mensagem = dado2;
+    div_mensagem_dado2.innerHTML = mensagem;
+  }
+
+  function verificar() {
+    var resultado = ``;
+
+    if (dado1 > dado2){
+        resultado = "Jogador [1] venceu"
+    }else if (dado2 > dado1){
+        resultado = "Jogador [2] venceu"
+    }else {resultado = "Empate!"}
+    
+    div_mensagem.innerHTML = `${resultado}!`;
+  }
+
+</script>

@@ -32,16 +32,12 @@
   freq = freq.toFixed(1);
 
   function notear() {
-    // var nota = Math.random() * 10;
-    // nota = nota.toFixed(2);
     var mensagem = ``;
     mensagem = nota;
     div_mensagem_nota.innerHTML = mensagem;
   }
 
   function frequenciar() {
-    // var freq = Math.random() * 100;
-    // freq = freq.toFixed(2);
     var mensagem = ``;
     mensagem = freq;
     div_mensagem_freq.innerHTML = mensagem;
@@ -53,7 +49,7 @@
     if (nota>=6 && freq>=75){
         resultado = "aprovado"
     }else {resultado = "reprovado"}
-    
+
     div_mensagem.innerHTML = `Com nota ${nota} e frequência ${freq}, o aluno está ${resultado}!`;
   }
 
