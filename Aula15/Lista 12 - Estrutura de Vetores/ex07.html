@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Filme:
+    <input type="text" id="input_filme">
+    <button onclick="cadastrar()">Cadastrar filme</button><br><br>
+
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    var lista_filmes = [];
+    var num = 0;
+
+    function cadastrar(){
+        var filme = input_filme.value;
+        var mensagem = "";
+
+        lista_filmes.push(filme);
+        input_filme.value = "";
+
+        if (num%2 == 0){
+            mensagem += `<span style="color: blue;">${num + 1}. ${lista_filmes[num]}</span><br>`;
+        }else {
+            mensagem += `<span style="color: red;">${num + 1}. ${lista_filmes[num]}</span><br>`;
+        }
+
+        num++;
+
+        div_mensagem.innerHTML += mensagem;
+    }
+</script>
