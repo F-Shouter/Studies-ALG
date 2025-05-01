@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    Destino de viagem:<input id="input_destino" type="text">
+    <button onclick="adicionar()">Adicionar</button><br><br>
+
+    <button onclick="mostrar_primeira()">Primeira viagem</button>
+    <button onclick="mostrar_terceira()">Terceira viagem</button>
+    <button onclick="mostrar_ultima()">Última viagem</button><br><br>
+
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+<script>
+
+    var lista_destinos = [];
+    
+    function adicionar(){
+        var destino = input_destino.value;
+        lista_destinos.push(destino);
+        input_destino.value = "";
+    }
+
+    function mostrar_primeira(){
+        if (lista_destinos[0] != ""){
+            div_mensagem.innerHTML = `Primeiro local cadastrado: ${lista_destinos[0]}`;
+        }else {div_mensagem.innerHTML = `AInda não viajou.`;}
+    }
+
+    function mostrar_terceira(){
+        if (lista_destinos[2] != ""){
+            div_mensagem.innerHTML = `Terceiro local cadastrado: ${lista_destinos[2]}`;
+        }else {div_mensagem.innerHTML = `AInda não viajou.`;}
+    }
+
+    function mostrar_ultima(){
+        if (lista_destinos[lista_destinos.length - 1] != ""){
+            div_mensagem.innerHTML = `Último local cadastrado: ${lista_destinos[lista_destinos.length - 1]}`;
+        }else {div_mensagem.innerHTML = `AInda não viajou.`;}
+    }
+
+    
+</script>
