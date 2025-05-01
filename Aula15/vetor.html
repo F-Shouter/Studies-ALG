@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Produto:
+    <input type="text" id="input_produto">
+    <button onclick="adicionar()">Adicionar</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+
+    var lista = [];
+
+    function adicionar(){
+        var produto = input_produto.value;
+
+        lista.push(produto);
+        
+
+        for (var i = 0; i < lista.length; i++){
+            div_mensagem.innerHTML += `${i} ${lista[i]} <br>`;
+        }
+    }
+</script>
