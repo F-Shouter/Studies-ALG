@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    Indique o resultado:
+    <select name="" id="select_resultado">
+        <option value="Vitória">Vitória</option>
+        <option value="Empate">Empate</option>
+        <option value="Derrota">Derrota</option>
+    </select>
+
+    <button onclick="registrar()">Registrar jogo</button><br><br>
+
+    Indique qual jogo deseja saber o resultado:
+    <input type="text" id="input_jogo" oninput="mostrar()"><br><br>
+
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+
+    var lista_resultados = []; 
+       
+
+    function registrar(){
+        var qtd_vitoria = 0;
+        var qtd_empate = 0;
+        var qtd_derrota = 0;
+        var resultado = select_resultado.value;
+
+        lista_resultados.push(resultado);  
+
+        for (var i=0; i<=lista_resultados.length; i++){
+            if (lista_resultados[i] == "Vitória"){
+                qtd_vitoria++;
+            }else if (lista_resultados[i] == "Empate"){
+                qtd_empate++;
+            }else if (lista_resultados[i] == "Derrota"){
+                qtd_derrota++;
+            }else {qtd_vitoria+=0; qtd_derrota+=0; qtd_empate+=0;}
+        }
+
+        div_mensagem.innerHTML = `
+            O time teve: ${qtd_vitoria} vitórias, ${qtd_empate} empates, ${qtd_derrota} derrotas<br>
+            Pontuação total: ${qtd_vitoria*3 + qtd_empate} pontos<br>
+            Aproveitamento: ${((qtd_vitoria*3 + qtd_empate)*100)/(Number(lista_resultados.length)*3)}%<br>
+        `;
+    } 
+
+    function mostrar(){
+        var jogo = Number(input_jogo.value);
+        var mensagem;
+        
+        if(lista_resultados[jogo -1 ] == "Vitória" || lista_resultados[jogo -1 ] == "Empate" || lista_resultados[jogo -1 ] == "Derrota"){
+            mensagem = `No ${jogo} º jogo, o time ${lista_resultados[jogo -1 ]}`;
+        }else {
+            mensagem = `Não foi cadastrado um ${jogo}º jogo`;
+        }
+
+        div_mensagem.innerHTML = `<br>${mensagem}`;
+    }
+    
+</script>

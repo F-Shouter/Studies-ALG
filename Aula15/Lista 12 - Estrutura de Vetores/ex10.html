@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Nome do linha:
+    <input type="text" id="input_linha">
+    <button onclick="gravar()">Gravar busão</button><br><br>
+
+    Pesquisar:
+    <input type="text" id="input_linha_pesquisada">
+    <button onclick="pesquisar()">Pesquisar</button><br><br>
+
+    <div id="div_mensagem"></div>
+    <div id="div_resultado"></div>
+</body>
+</html>
+<script>
+    var lista_linhas = [];
+    
+
+    function gravar(){
+        var linha = input_linha.value;
+        var mensagem = "";
+        lista_linhas.push(linha);
+        
+        for(var count=lista_linhas.length; count>=1; count--){
+            mensagem += `${count}ª vez linha: ${lista_linhas[count-1]}<br>`;
+        }        
+        div_mensagem.innerHTML = `${mensagem} <br>`;
+    }
+
+    function pesquisar(){
+        var lista_ordens = [];
+        div_resultado.innerHTML = "";
+        var linha_pesquisada = input_linha_pesquisada.value;
+        var resultado = "";
+        var ordem = "";
+        
+        for(var i=0; i<=lista_linhas.length; i++){
+            if (lista_linhas[i] == linha_pesquisada){
+                lista_ordens.push(i + 1);
+            }
+        }
+        resultado = `Você já pegou essa linha ${lista_ordens.length} vezes, nessa ordem: ${lista_ordens}.`;
+
+        div_resultado.innerHTML += `${resultado}<br>`;
+    } 
+    
+</script>

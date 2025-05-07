@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Nome do projeto:
+    <input type="text" id="input_projeto">
+    <button onclick="registrar()">Registrar projeto</button><br><br>
+    <button onclick="mostrar()">Mostrar projetos</button><br><br>
+
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+    var lista_projetos = [];
+
+    function registrar(){
+        var projeto = input_projeto.value;
+        var mensagem = "";
+        var profissional = "";
+
+        lista_projetos.push(projeto);
+
+        if (lista_projetos.length >=0 && lista_projetos.length <= 4){
+            profissional = "Júnior";
+        }else if (lista_projetos.length >= 5 && lista_projetos.length <= 12){
+            profissional = "Pleno";
+        }else {profissional = "Sênior";}
+        
+        mensagem = ` Você já fez ${lista_projetos.length} projetos. Por isso você é um profissional ${profissional}<br>`;
+        
+
+        div_mensagem.innerHTML = `${mensagem} <br>`;
+    }
+
+    function mostrar(){
+        var historico = "";
+
+        for(var count = lista_projetos.length-1; count>=0; count--){
+            historico += `${count+1}. Projeto: ${lista_projetos[count]}<br>`;
+        }
+        div_mensagem.innerHTML += historico;
+    }
+</script>
