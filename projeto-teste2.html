@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Apto 12C</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    header {
+      background-color: #1e293b;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .info-cards {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .card {
+      flex: 1 1 250px;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem 1.5rem;
+    }
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: bold;
+    }
+    .status.critico {
+      color: #dc2626;
+    }
+    .status.alerta {
+      color: #eab308;
+    }
+    .status.normal {
+      color: #16a34a;
+    }
+    .sensor-grafico {
+      margin-top: 2rem;
+    }
+    canvas {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Monitoramento de Gás - Apto 12C</h1>
+  </header>
+  <div class="container">
+    <div class="info-cards">
+      <div class="card">
+        <h2>Local</h2>
+        <p>Cozinha</p>
+      </div>
+      <div class="card">
+        <h2>Status</h2>
+        <p class="status critico">
+          &#9888; Crítico - Alta concentração detectada
+        </p>
+      </div>
+      <div class="card">
+        <h2>Nível de Gás</h2>
+        <p>8.5%</p>
+      </div>
+      <div class="card">
+        <h2>Última Atualização</h2>
+        <p>20:06 - 02/10/2005</p>
+      </div>
+    </div>
+
+    <div class="sensor-grafico">
+      <h2>Leitura dos Sensores</h2>
+      <canvas id="grafico" width="600" height="300"></canvas>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("grafico");
+    const ctx = canvas.getContext("2d");
+
+    const dados = [309.29, 312.91, 295.91];
+    const labels = ["MQ2-001", "MQ2-002", "MQ2-003"];
+
+    ctx.fillStyle = "#1e293b";
+    ctx.font = "16px Arial";
+    ctx.fillText("Sensor", 50, 30);
+    ctx.fillText("Leitura (ppm)", 400, 30);
+
+    dados.forEach((valor, i) => {
+      const x = 80;
+      const y = 70 + i * 60;
+
+      ctx.fillStyle = "#0f172a";
+      ctx.fillText(labels[i], x, y);
+
+      ctx.fillStyle = "#3b82f6";
+      ctx.fillRect(x + 120, y - 20, valor / 2, 30);
+
+      ctx.fillStyle = "#0f172a";
+      ctx.fillText(valor.toFixed(2), x + 130 + valor / 2, y);
+    });
+  </script>
+</body>
+</html>

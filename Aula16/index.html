@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio - Controle de estoque</title>
+</head>
+
+<body>
+    <h3>Produto</h3>
+    <hr>
+    <div class="div_container">
+                Nome:
+                <input type="text" id="input_nome"><br><br>
+                Código:
+                <input type="number" id="input_codigo"><br><br>
+                Quantidade:
+                <input type="number" id="input_quantidade">
+        <hr>
+        <div>
+            <button onclick="cadastrar()">Cadastrar Produto</button>
+            <button onclick="repor()">Repor Estoque</button>
+            <button onclick="vender()">Vender Produto</button>
+            <button onclick="exibir()">Exibir Relatório</button>
+            <button onclick="remover()">Remover Produto</button>
+        </div>
+    </div>
+    <hr><br>
+
+    <div id="div_mensagem"></div>
+</body>
+
+</html>
+<script>
+    var lista_nomes = [];
+    var lista_codigos = [];
+    var lista_quantidades = [];
+    var lista_vezes_vendidos = [];
+
+    function cadastrar() {
+        var nome = input_nome.value;
+        var codigo = Number(input_codigo.value);
+        var quantidade = Number(input_quantidade.value);
+        var tem_codigo_cadastrado = false;
+        if ((nome != "" && codigo != "") && (quantidade >= 10)) {
+            if (lista_codigos.length > 0) {
+                for (var i = 0; i < lista_codigos.length; i++) {
+                    if (lista_codigos[i] == codigo) {
+                        alert("Código de produto já existente");
+                        tem_codigo_cadastrado = true;
+                    }
+                }
+                if (tem_codigo_cadastrado == false) {
+                    alert(`Produto ${nome} registrado com sucesso`);
+                    lista_nomes.push(nome);
+                    lista_codigos.push(codigo);
+                    lista_quantidades.push(quantidade);
+                    lista_vezes_vendidos.push(0);
+                }
+            } else {
+                alert(`Produto ${nome} registrado com sucesso`);
+                lista_nomes.push(nome);
+                lista_codigos.push(codigo);
+                lista_quantidades.push(quantidade);
+            }
+        } else {
+            alert("Preencha todos os campos para registrar um novo produto");
+        }
+    }
+
+    function repor() {
+        var nome = input_nome.value;
+        var codigo = Number(input_codigo.value);
+        var quantidade = Number(input_quantidade.value);
+        var mensagem = "";
+        if ((nome != "" && codigo != "") && (quantidade > 0)) {
+            for (var i = 0; i < lista_nomes.length; i++) {
+                if ((lista_nomes[i] == nome) && (lista_codigos[i] == codigo)) {
+                    lista_quantidades[i] += quantidade;
+                    mensagem = `${quantidade}x do ${nome} foi reposto com sucesso<br>
+                    Código: ${lista_codigos[i]} | Produto: ${lista_nomes[i]} | Quantidade em Estoque: ${lista_quantidades[i]}
+                    `;
+                    if (lista_quantidades[i] < 10) {
+                        mensagem += `(precisa ser reposto)`;
+                    } else { mensagem += `(OK)`; }
+                } else {
+                    mensagem = `Produto não identificado`;
+                }
+            }
+        } else {
+            if ((nome != "" && codigo != "") && (quantidade <= 0)) {
+                mensagem = `Quantidade inválida`;
+            } else {
+                mensagem = `Produto não identificado`;
+            }
+        }
+        div_mensagem.innerHTML = `${mensagem}`;
+    }
+
+    function vender() {
+        var nome = input_nome.value;
+        var codigo = Number(input_codigo.value);
+        var quantidade = Number(input_quantidade.value);
+        var mensagem = "";
+        if ((nome != "" && codigo != "") && (quantidade > 0)) {
+            for (var i = 0; i < lista_nomes.length; i++) {
+                if ((lista_nomes[i] == nome) && (lista_codigos[i] == codigo) && (lista_quantidades[i] >= quantidade)) {
+                    lista_quantidades[i] -= quantidade;
+                    mensagem = `${quantidade}x do ${nome} foi vendido com sucesso<br>
+                    Código: ${lista_codigos[i]} | Produto: ${lista_nomes[i]} | Quantidade em Estoque: ${lista_quantidades[i]}`;
+                    lista_vezes_vendidos[i]++;
+                } else {
+                    mensagem = `Produto não identificado`;
+                }
+
+                if (lista_quantidades[i] < 10) {
+                    mensagem += `(precisa ser reposto)`;
+                } else { mensagem += `(OK)`; }
+            }
+        } else {
+            if ((nome != "" && codigo != "") && (quantidade <= 0)) {
+                mensagem = `Quantidade inválida`;
+            } else {
+                mensagem = `Produto não identificado`;
+            }
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+    function exibir() {
+        var mensagem = "";
+        var produto_maior_quantidade;
+        var produto_menor_quantidade;
+        var vezes_mais_vendido = lista_vezes_vendidos[0];
+        var vezes_menos_vendido = lista_vezes_vendidos[0];
+        var produto_mais_vendido;
+        var produto_menos_vendido;
+
+        for (var i = 0; i < lista_nomes.length; i++) {
+            mensagem += `
+                Código: ${lista_codigos[i]} | Produto: ${lista_nomes[i]} | Quantidade em Estoque: ${lista_quantidades[i]}
+            `;
+            if (lista_quantidades[i] < 10) {
+                mensagem += `(precisa ser reposto)<br>`;
+            } else { mensagem += `(OK)<br>`; }
+        }
+
+        for (var i = 0; i < lista_nomes.length; i++) {
+            if (lista_vezes_vendidos[i] > vezes_mais_vendido) {
+                vezes_mais_vendido = lista_vezes_vendidos[i];
+                produto_mais_vendido = lista_nomes[i];
+            }
+            if (lista_vezes_vendidos[i] < vezes_menos_vendido) {
+                vezes_menos_vendido = lista_vezes_vendidos[i];
+                produto_menos_vendido = lista_nomes[i];
+            }
+        }
+
+        for (var i = 0; i < lista_nomes.length; i++) {
+            var qtd_alta = lista_quantidades[0];
+            var qtd_baixa = lista_quantidades[0];
+            if (qtd_alta < lista_quantidades[i]) {
+                qtd_alta = lista_quantidades[i];
+                produto_maior_quantidade = lista_nomes[i];
+            }
+            if (qtd_baixa > lista_quantidades[i]) {
+                qtd_baixa = lista_quantidades[i];
+                produto_menor_quantidade = lista_nomes[i];
+            }
+        }
+
+        div_mensagem.innerHTML = `
+            ${mensagem}<br><hr>
+            Produto com maior quantidade em estoque: ${produto_maior_quantidade}<br>
+            Produto com menor quantidade em estoque: ${produto_menor_quantidade}<br>
+            Produto mais vendido: ${produto_mais_vendido}<br>
+            Produto menos vendido: ${produto_menos_vendido}<hr>
+        `;
+    }
+
+    function remover(){
+        lista_nomes.slice(lista_nomes.length - 1, 1);
+        lista_codigos.slice(lista_nomes.length - 1, 1);
+        lista_quantidades.slice(lista_nomes.length - 1, 1);
+    }
+
+
+</script>

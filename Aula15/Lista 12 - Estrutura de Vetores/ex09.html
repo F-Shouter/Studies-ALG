@@ -39,9 +39,15 @@
     function mostrar(){
         var historico = "";
 
-        for(var count = lista_projetos.length-1; count>=0; count--){
-            historico += `${count+1}. Projeto: ${lista_projetos[count]}<br>`;
-        }
+         for(var count = lista_projetos.length-1; count>=0; count--){
+             historico += `${count+1}. Projeto: ${lista_projetos[count]}<br>`;
+         }
+
+        // ou, 
+        //for(var count = 0; count < lista_projetos.length; count++){
+        //    historico+= `${lista_projetos[lista_projetos.length -1 - count]}`;
+        //}
+
         div_mensagem.innerHTML += historico;
     }
 </script>
