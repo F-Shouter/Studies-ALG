@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sete Meio</title>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            background-color: #6b6d62;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .div_container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button {
+            width: 200px;
+            height: 50px;
+            font-size: 20px;
+            border-radius: 7px;
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.06);
+            border-color: white;
+        }
+
+        #div_jogo {
+            width: 70%;
+            height: 95%;
+            margin-right: 20px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            border-radius: 7px;
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.06);
+            background-color: rgb(155, 24, 24);
+        }
+
+        #div_jogador {
+            width: 57%;
+            height: 94%;
+            margin: 20px 0px 20px 20px;
+            border-radius: 7px;
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.06);
+            background-color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #div_banca {
+            width: 40%;
+            height: 94%;
+            margin: 20px 0px 20px 20px;
+            border-radius: 7px 0px 0px 7px;
+            box-shadow: 0 4px 7px rgba(0, 0, 0, 0.06);
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #div_botoes {
+            width: 20%;
+            height: 50%;
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .div_titulo,
+        .div_pontos {
+            font-size: 40px;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            margin-top: 10px;
+        }
+
+        .div_espaco_de_jogo {
+            width: 95%;
+            height: 70%;
+            margin: 20px;
+            position: relative;
+        }
+
+        @keyframes animacao_1 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(0px, 0px);
+            }
+        }
+
+        @keyframes animacao_2 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(90px, 0px);
+            }
+        }
+
+        @keyframes animacao_3 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(180px, 0px);
+            }
+        }
+
+        @keyframes animacao_4 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(270px, 0px);
+            }
+
+        }
+
+        @keyframes animacao_5 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(360px, 0px);
+            }
+
+        }
+
+        @keyframes animacao_6 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(0px, 120px);
+            }
+
+        }
+
+        @keyframes animacao_7 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(90px, 120px);
+            }
+
+        }
+
+        @keyframes animacao_8 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(180px, 120px);
+            }
+
+        }
+
+        @keyframes animacao_9 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(270px, 120px);
+            }
+
+        }
+
+        @keyframes animacao_10 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(360px, 120px);
+            }
+
+        }
+
+        @keyframes animacao_11 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(0px, 240px);
+            }
+
+        }
+
+        @keyframes animacao_12 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(90px, 240px);
+            }
+
+        }
+
+        @keyframes animacao_13 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(180px, 240px);
+            }
+
+        }
+
+        @keyframes animacao_14 {
+            0% {
+                transform: translate(150px, 300px);
+            }
+
+            100% {
+                transform: translate(270px, 240px);
+            }
+
+        }
+
+        img {
+            width: 100px;
+            position: absolute;
+        }
+
+        #img_1_bancada,
+        #img_1_jogador {
+            animation: animacao_1 3s forwards;
+        }
+
+        #img_2_bancada,
+        #img_2_jogador {
+            animation: animacao_2 3s forwards;
+        }
+
+        #img_3_bancada,
+        #img_3_jogador {
+            animation: animacao_3 3s forwards;
+        }
+
+        #img_4_bancada,
+        #img_4_jogador {
+            animation: animacao_4 3s forwards;
+        }
+
+        #img_5_bancada,
+        #img_5_jogador {
+            animation: animacao_5 3s forwards;
+        }
+
+        #img_6_bancada,
+        #img_6_jogador {
+            animation: animacao_6 3s forwards;
+        }
+
+        #img_7_bancada,
+        #img_7_jogador {
+            animation: animacao_7 3s forwards;
+        }
+
+        #img_8_bancada,
+        #img_8_jogador {
+            animation: animacao_8 3s forwards;
+        }
+
+        #img_9_bancada,
+        #img_9_jogador {
+            animation: animacao_9 3s forwards;
+        }
+
+        #img_10_bancada,
+        #img_10_jogador {
+            animation: animacao_10 3s forwards;
+        }
+
+        #img_11_bancada,
+        #img_11_jogador {
+            animation: animacao_11 3s forwards;
+        }
+
+        #img_12_bancada,
+        #img_12_jogador {
+            animation: animacao_12 3s forwards;
+        }
+
+        #img_13_bancada,
+        #img_13_jogador {
+            animation: animacao_13 3s forwards;
+        }
+
+        #img_14_bancada,
+        #img_14_jogador {
+            animation: animacao_14 3s forwards;
+        }
+        #div_mensagem_jogador, #div_mensagem_bancada{
+            width: 100%;
+            height: 50%;
+            padding-top: 200px;
+            text-align: center;
+            font-size: 20px;
+            font-family: 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="btn_jogar" onclick="comecar()">Jogar Sete e Meio</button>
+
+    <div class="div_container" id="div_container_principal" style="display: none;">
+
+        <div id="div_banca">
+            <div class="div_titulo">BANCA</div>
+            <div class="div_pontos" id="div_pontos_bancada">0</div>
+            <div class="div_espaco_de_jogo">
+                <div id="img_1_bancada"></div>
+                <div id="img_2_bancada"></div>
+                <div id="img_3_bancada"></div>
+                <div id="img_4_bancada"></div>
+                <div id="img_5_bancada"></div>
+                <div id="img_6_bancada"></div>
+                <div id="img_7_bancada"></div>
+                <div id="img_8_bancada"></div>
+                <div id="img_9_bancada"></div>
+                <div id="img_10_bancada"></div>
+                <div id="img_11_bancada"></div>
+                <div id="img_12_bancada"></div>
+                <div id="img_13_bancada"></div>
+                <div id="img_14_bancada"></div>
+                <div id="div_mensagem_bancada"></div>
+            </div>
+        </div>
+
+        <div id="div_jogo">
+
+            <div id="div_jogador">
+                <div class="div_titulo">JOGADOR</div>
+                <div class="div_pontos" id="div_pontos_jogador">0</div>
+                <div class="div_espaco_de_jogo">
+                    <div id="img_1_jogador"></div>
+                    <div id="img_2_jogador"></div>
+                    <div id="img_3_jogador"></div>
+                    <div id="img_4_jogador"></div>
+                    <div id="img_5_jogador"></div>
+                    <div id="img_6_jogador"></div>
+                    <div id="img_7_jogador"></div>
+                    <div id="img_8_jogador"></div>
+                    <div id="img_9_jogador"></div>
+                    <div id="img_10_jogador"></div>
+                    <div id="img_11_jogador"></div>
+                    <div id="img_12_jogador"></div>
+                    <div id="img_13_jogador"></div>
+                    <div id="img_14_jogador"></div>
+                    <div id="div_mensagem_jogador"></div>
+                </div>
+            </div>
+
+
+
+            <div id="div_botoes">
+                <button onclick="pedir_outra()">Pedir Outra Carta</button>
+                <button onclick="passar_vez()">Passar Vez</button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+    var baralho = [
+        '<img src="image/as_copas.png" alt="">', '<img src="image/as_espadas.png" alt="">', '<img src="image/as_ouro.png" alt="">', '<img src="image/as_paus.png" alt="">', '<img src="image/dois_copas.png" alt="">', '<img src="image/dois_espadas.png" alt="">', '<img src="image/dois_ouro.png" alt="">', '<img src="image/dois_paus.png" alt="">', '<img src="image/tres_copas.png" alt="">', '<img src="image/tres_espadas.png" alt="">', '<img src="image/tres_ouro.png" alt="">', '<img src="image/tres_paus.png" alt="">', '<img src="image/quatro_copas.png" alt="">', '<img src="image/quatro_espadas.png" alt="">', '<img src="image/quatro_ouro.png" alt="">', '<img src="image/quatro_paus.png" alt="">', '<img src="image/cinco_copas.png" alt="">', '<img src="image/cinco_espadas.png" alt="">', '<img src="image/cinco_ouro.png" alt="">', '<img src="image/cinco_paus.png" alt="">', '<img src="image/seis_copas.png" alt="">', '<img src="image/seis_espadas.png" alt="">', '<img src="image/seis_ouro.png" alt="">', '<img src="image/seis_paus.png" alt="">', '<img src="image/sete_copas.png" alt="">', '<img src="image/sete_espadas.png" alt="">', '<img src="image/sete_ouro.png" alt="">', '<img src="image/sete_paus.png" alt="">', '<img src="image/valete_copas.png" alt="">', '<img src="image/valete_espadas.png" alt="">', '<img src="image/valete_ouro.png" alt="">', '<img src="image/valete_paus.png" alt="">', '<img src="image/dama_copas.png" alt="">', '<img src="image/dama_espadas.png" alt="">', '<img src="image/dama_ouro.png" alt="">', '<img src="image/dama_paus.png" alt="">', '<img src="image/rei_copas.png" alt="">', '<img src="image/rei_espadas.png" alt="">', '<img src="image/rei_ouro.png" alt="">', '<img src="image/rei_paus.png" alt="">'
+    ];
+    var lista_pontos = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 7, 7, 7, 7, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5];
+    var pontos_jogador = 0;
+    var pontos_bancada = 0;
+    var espaco_usado_jogador = 0;
+    var espaco_usado_bancada = 0;
+
+
+    function comecar() {
+        btn_jogar.style.display = "none";
+        div_container_principal.style.display = "flex";
+
+        exibir_primeiras_cartas();
+    }
+
+    function exibir_primeiras_cartas() {
+        var num_jogador = Math.random() * 40;
+        var num_bancada = Math.random() * 40;
+
+        num_jogador = parseInt(num_jogador);
+        num_bancada = parseInt(num_bancada);
+
+        while (num_jogador == num_bancada) {
+            num_bancada = Math.random() * 40;
+            num_bancada = parseInt(num_bancada);
+        }
+
+        img_1_jogador.innerHTML = baralho[num_jogador];
+        img_1_bancada.innerHTML = baralho[num_bancada];
+
+        baralho[num_jogador] = "ja_jogado";
+        baralho[num_bancada] = "ja_jogado";
+
+        pontos_jogador += Number(lista_pontos[num_jogador]);
+        div_pontos_jogador.innerHTML = pontos_jogador;
+        
+        pontos_bancada += Number(lista_pontos[num_bancada]);
+        div_pontos_bancada.innerHTML = pontos_bancada;
+
+        espaco_usado_jogador++;
+        espaco_usado_bancada++;
+    }
+
+    function pedir_outra(){
+        var num_jogador = Math.random() * 40;
+        
+
+        num_jogador = parseInt(num_jogador);       
+
+        while (baralho[num_jogador] == "ja_jogado"){
+            num_jogador = Math.random() * 40;
+            num_jogador = parseInt(num_jogador);
+        }     
+        
+        if (espaco_usado_jogador == 1){
+            img_2_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 2){
+            img_3_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 3){
+            img_4_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 4){
+            img_5_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 5){
+            img_6_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 6){
+            img_7_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 7){
+            img_8_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 8){
+            img_9_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 9){
+            img_10_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 10){
+            img_11_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 11){
+            img_12_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else if (espaco_usado_jogador == 12){
+            img_13_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }else {
+            img_14_jogador.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_jogador]}</div>`;
+        }   
+        
+        espaco_usado_jogador++;
+
+        baralho[num_jogador] = "ja_jogado";
+
+        pontos_jogador += Number(lista_pontos[num_jogador]);
+        div_pontos_jogador.innerHTML = pontos_jogador;
+        
+
+        if (pontos_jogador == 7.5){
+            div_mensagem_jogador.innerHTML = `SETE E MEIO! O jogador venceu com 7.5 pontos!`;
+        }else if (pontos_jogador > 7.5){
+            div_mensagem_jogador.innerHTML = `O JOGADOR ESTOUROU!<br> A banca venceu com ${pontos_bancada} pontos.`;
+        }
+        
+    }
+    function passar_vez(){
+        var num_bancada = Math.random() * 40;
+        num_bancada = parseInt(num_bancada); 
+
+        while (baralho[num_bancada] == "ja_jogado"){
+            num_bancada = Math.random() * 40;
+            num_bancada = parseInt(num_bancada);
+        }
+
+        if (espaco_usado_bancada == 1){
+            img_2_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 2){
+            img_3_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 3){
+            img_4_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 4){
+            img_5_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 5){
+            img_6_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 6){
+            img_7_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 7){
+            img_8_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 8){
+            img_9_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 9){
+            img_10_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 10){
+            img_11_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 11){
+            img_12_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else if (espaco_usado_bancada == 12){
+            img_13_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }else {
+            img_14_bancada.innerHTML = `<div style= "animation: animacao_1 3s forwards; margin: 0">${baralho[num_bancada]}</div>`;
+        }
+
+        espaco_usado_bancada++;
+        baralho[num_bancada] = "ja_jogado";
+
+        pontos_bancada += Number(lista_pontos[num_bancada]);
+        div_pontos_bancada.innerHTML = pontos_bancada;
+
+        if (pontos_bancada == 7.5){
+            div_mensagem_bancada.innerHTML = `SETE E MEIO! A bancada venceu com 7.5 pontos!`;
+        }else if (pontos_bancada > 7.5){
+            div_mensagem_bancada.innerHTML = `A BANCADA ESTOUROU!<br> O jogador venceu com ${pontos_jogador} pontos.`;
+        }
+    }
+
+
+</script>
