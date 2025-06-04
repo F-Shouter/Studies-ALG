@@ -1,0 +1,1955 @@
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DesenhoAmigo - Jogo Colaborativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Baloo 2', cursive;
+            background-color: #f0f9ff;
+            overflow-x: hidden;
+        }
+
+        .screen {
+            display: none;
+            min-height: 100vh;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .avatar:hover,
+        .avatar.selected {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+        }
+
+        .canvas-container {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            border: 4px solid #3b82f6;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #drawingCanvas {
+            background-color: white;
+            cursor: crosshair;
+        }
+
+        .player-turn {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.7);
+        }
+
+        .player-waiting {
+            opacity: 0.6;
+        }
+
+        .color-picker {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .color-option:hover,
+        .color-option.selected {
+            transform: scale(1.2);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .brush-size {
+            width: 200px;
+        }
+
+        .quiz-option {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background-color: #dbeafe;
+            transform: translateY(-2px);
+        }
+
+        .chart-container {
+            height: 300px;
+            position: relative;
+        }
+
+        .bar {
+            position: absolute;
+            bottom: 0;
+            width: 60px;
+            background-color: #3b82f6;
+            border-radius: 8px 8px 0 0;
+            transition: height 1s ease-in-out;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background-color: #60a5fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            z-index: 1000;
+        }
+    </style>
+    <style>
+        *,
+        ::before,
+        ::after {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        ::backdrop {
+            --tw-border-spacing-x: 0;
+            --tw-border-spacing-y: 0;
+            --tw-translate-x: 0;
+            --tw-translate-y: 0;
+            --tw-rotate: 0;
+            --tw-skew-x: 0;
+            --tw-skew-y: 0;
+            --tw-scale-x: 1;
+            --tw-scale-y: 1;
+            --tw-pan-x: ;
+            --tw-pan-y: ;
+            --tw-pinch-zoom: ;
+            --tw-scroll-snap-strictness: proximity;
+            --tw-gradient-from-position: ;
+            --tw-gradient-via-position: ;
+            --tw-gradient-to-position: ;
+            --tw-ordinal: ;
+            --tw-slashed-zero: ;
+            --tw-numeric-figure: ;
+            --tw-numeric-spacing: ;
+            --tw-numeric-fraction: ;
+            --tw-ring-inset: ;
+            --tw-ring-offset-width: 0px;
+            --tw-ring-offset-color: #fff;
+            --tw-ring-color: rgb(59 130 246 / 0.5);
+            --tw-ring-offset-shadow: 0 0 #0000;
+            --tw-ring-shadow: 0 0 #0000;
+            --tw-shadow: 0 0 #0000;
+            --tw-shadow-colored: 0 0 #0000;
+            --tw-blur: ;
+            --tw-brightness: ;
+            --tw-contrast: ;
+            --tw-grayscale: ;
+            --tw-hue-rotate: ;
+            --tw-invert: ;
+            --tw-saturate: ;
+            --tw-sepia: ;
+            --tw-drop-shadow: ;
+            --tw-backdrop-blur: ;
+            --tw-backdrop-brightness: ;
+            --tw-backdrop-contrast: ;
+            --tw-backdrop-grayscale: ;
+            --tw-backdrop-hue-rotate: ;
+            --tw-backdrop-invert: ;
+            --tw-backdrop-opacity: ;
+            --tw-backdrop-saturate: ;
+            --tw-backdrop-sepia: ;
+            --tw-contain-size: ;
+            --tw-contain-layout: ;
+            --tw-contain-paint: ;
+            --tw-contain-style:
+        }
+
+        /* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */
+        *,
+        ::after,
+        ::before {
+            box-sizing: border-box;
+            border-width: 0;
+            border-style: solid;
+            border-color: #e5e7eb
+        }
+
+        ::after,
+        ::before {
+            --tw-content: ''
+        }
+
+        :host,
+        html {
+            line-height: 1.5;
+            -webkit-text-size-adjust: 100%;
+            -moz-tab-size: 4;
+            tab-size: 4;
+            font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        body {
+            margin: 0;
+            line-height: inherit
+        }
+
+        hr {
+            height: 0;
+            color: inherit;
+            border-top-width: 1px
+        }
+
+        abbr:where([title]) {
+            -webkit-text-decoration: underline dotted;
+            text-decoration: underline dotted
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-size: inherit;
+            font-weight: inherit
+        }
+
+        a {
+            color: inherit;
+            text-decoration: inherit
+        }
+
+        b,
+        strong {
+            font-weight: bolder
+        }
+
+        code,
+        kbd,
+        pre,
+        samp {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            font-feature-settings: normal;
+            font-variation-settings: normal;
+            font-size: 1em
+        }
+
+        small {
+            font-size: 80%
+        }
+
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline
+        }
+
+        sub {
+            bottom: -.25em
+        }
+
+        sup {
+            top: -.5em
+        }
+
+        table {
+            text-indent: 0;
+            border-color: inherit;
+            border-collapse: collapse
+        }
+
+        button,
+        input,
+        optgroup,
+        select,
+        textarea {
+            font-family: inherit;
+            font-feature-settings: inherit;
+            font-variation-settings: inherit;
+            font-size: 100%;
+            font-weight: inherit;
+            line-height: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            margin: 0;
+            padding: 0
+        }
+
+        button,
+        select {
+            text-transform: none
+        }
+
+        button,
+        input:where([type=button]),
+        input:where([type=reset]),
+        input:where([type=submit]) {
+            -webkit-appearance: button;
+            background-color: transparent;
+            background-image: none
+        }
+
+        :-moz-focusring {
+            outline: auto
+        }
+
+        :-moz-ui-invalid {
+            box-shadow: none
+        }
+
+        progress {
+            vertical-align: baseline
+        }
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+            height: auto
+        }
+
+        [type=search] {
+            -webkit-appearance: textfield;
+            outline-offset: -2px
+        }
+
+        ::-webkit-search-decoration {
+            -webkit-appearance: none
+        }
+
+        ::-webkit-file-upload-button {
+            -webkit-appearance: button;
+            font: inherit
+        }
+
+        summary {
+            display: list-item
+        }
+
+        blockquote,
+        dd,
+        dl,
+        figure,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        hr,
+        p,
+        pre {
+            margin: 0
+        }
+
+        fieldset {
+            margin: 0;
+            padding: 0
+        }
+
+        legend {
+            padding: 0
+        }
+
+        menu,
+        ol,
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0
+        }
+
+        dialog {
+            padding: 0
+        }
+
+        textarea {
+            resize: vertical
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            opacity: 1;
+            color: #9ca3af
+        }
+
+        [role=button],
+        button {
+            cursor: pointer
+        }
+
+        :disabled {
+            cursor: default
+        }
+
+        audio,
+        canvas,
+        embed,
+        iframe,
+        img,
+        object,
+        svg,
+        video {
+            display: block;
+            vertical-align: middle
+        }
+
+        img,
+        video {
+            max-width: 100%;
+            height: auto
+        }
+
+        [hidden]:where(:not([hidden=until-found])) {
+            display: none
+        }
+
+        .container {
+            width: 100%
+        }
+
+        @media (min-width: 640px) {
+            .container {
+                max-width: 640px
+            }
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                max-width: 768px
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .container {
+                max-width: 1024px
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .container {
+                max-width: 1280px
+            }
+        }
+
+        @media (min-width: 1536px) {
+            .container {
+                max-width: 1536px
+            }
+        }
+
+        .relative {
+            position: relative
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto
+        }
+
+        .mb-12 {
+            margin-bottom: 3rem
+        }
+
+        .mb-2 {
+            margin-bottom: 0.5rem
+        }
+
+        .mb-4 {
+            margin-bottom: 1rem
+        }
+
+        .mb-6 {
+            margin-bottom: 1.5rem
+        }
+
+        .mb-8 {
+            margin-bottom: 2rem
+        }
+
+        .ml-4 {
+            margin-left: 1rem
+        }
+
+        .mr-2 {
+            margin-right: 0.5rem
+        }
+
+        .mt-1 {
+            margin-top: 0.25rem
+        }
+
+        .mt-2 {
+            margin-top: 0.5rem
+        }
+
+        .mt-4 {
+            margin-top: 1rem
+        }
+
+        .mt-8 {
+            margin-top: 2rem
+        }
+
+        .block {
+            display: block
+        }
+
+        .inline-block {
+            display: inline-block
+        }
+
+        .flex {
+            display: flex
+        }
+
+        .grid {
+            display: grid
+        }
+
+        .h-48 {
+            height: 12rem
+        }
+
+        .h-64 {
+            height: 16rem
+        }
+
+        .h-full {
+            height: 100%
+        }
+
+        .w-48 {
+            width: 12rem
+        }
+
+        .w-64 {
+            width: 16rem
+        }
+
+        .w-full {
+            width: 100%
+        }
+
+        .max-w-4xl {
+            max-width: 56rem
+        }
+
+        .transform {
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .cursor-pointer {
+            cursor: pointer
+        }
+
+        .cursor-not-allowed {
+            cursor: not-allowed
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr))
+        }
+
+        .grid-cols-3 {
+            grid-template-columns: repeat(3, minmax(0, 1fr))
+        }
+
+        .flex-col {
+            flex-direction: column
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap
+        }
+
+        .items-center {
+            align-items: center
+        }
+
+        .justify-center {
+            justify-content: center
+        }
+
+        .gap-4 {
+            gap: 1rem
+        }
+
+        .gap-6 {
+            gap: 1.5rem
+        }
+
+        .gap-8 {
+            gap: 2rem
+        }
+
+        .overflow-hidden {
+            overflow: hidden
+        }
+
+        .rounded-2xl {
+            border-radius: 1rem
+        }
+
+        .rounded-full {
+            border-radius: 9999px
+        }
+
+        .rounded-lg {
+            border-radius: 0.5rem
+        }
+
+        .rounded-xl {
+            border-radius: 0.75rem
+        }
+
+        .border-2 {
+            border-width: 2px
+        }
+
+        .border-4 {
+            border-width: 4px
+        }
+
+        .border-b-2 {
+            border-bottom-width: 2px
+        }
+
+        .border-l-2 {
+            border-left-width: 2px
+        }
+
+        .border-blue-200 {
+            --tw-border-opacity: 1;
+            border-color: rgb(191 219 254 / var(--tw-border-opacity, 1))
+        }
+
+        .border-blue-300 {
+            --tw-border-opacity: 1;
+            border-color: rgb(147 197 253 / var(--tw-border-opacity, 1))
+        }
+
+        .border-blue-400 {
+            --tw-border-opacity: 1;
+            border-color: rgb(96 165 250 / var(--tw-border-opacity, 1))
+        }
+
+        .border-gray-300 {
+            --tw-border-opacity: 1;
+            border-color: rgb(209 213 219 / var(--tw-border-opacity, 1))
+        }
+
+        .border-purple-200 {
+            --tw-border-opacity: 1;
+            border-color: rgb(233 213 255 / var(--tw-border-opacity, 1))
+        }
+
+        .border-purple-300 {
+            --tw-border-opacity: 1;
+            border-color: rgb(216 180 254 / var(--tw-border-opacity, 1))
+        }
+
+        .border-purple-400 {
+            --tw-border-opacity: 1;
+            border-color: rgb(192 132 252 / var(--tw-border-opacity, 1))
+        }
+
+        .border-yellow-300 {
+            --tw-border-opacity: 1;
+            border-color: rgb(253 224 71 / var(--tw-border-opacity, 1))
+        }
+
+        .bg-blue-100 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(219 234 254 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-blue-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(239 246 255 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-blue-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(59 130 246 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-gray-400 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(156 163 175 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-gray-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(107 114 128 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-green-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(34 197 94 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-orange-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 247 237 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-orange-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(249 115 22 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-purple-100 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(243 232 255 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-purple-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(250 245 255 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-purple-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(168 85 247 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-red-500 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(239 68 68 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-white {
+            --tw-bg-opacity: 1;
+            background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-yellow-400 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(250 204 21 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-yellow-50 {
+            --tw-bg-opacity: 1;
+            background-color: rgb(254 252 232 / var(--tw-bg-opacity, 1))
+        }
+
+        .bg-gradient-to-b {
+            background-image: linear-gradient(to bottom, var(--tw-gradient-stops))
+        }
+
+        .bg-gradient-to-r {
+            background-image: linear-gradient(to right, var(--tw-gradient-stops))
+        }
+
+        .from-blue-100 {
+            --tw-gradient-from: #dbeafe var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(219 234 254 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .from-blue-50 {
+            --tw-gradient-from: #eff6ff var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(239 246 255 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .from-blue-500 {
+            --tw-gradient-from: #3b82f6 var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(59 130 246 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .from-yellow-50 {
+            --tw-gradient-from: #fefce8 var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(254 252 232 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .to-green-50 {
+            --tw-gradient-to: #f0fdf4 var(--tw-gradient-to-position)
+        }
+
+        .to-orange-50 {
+            --tw-gradient-to: #fff7ed var(--tw-gradient-to-position)
+        }
+
+        .to-purple-100 {
+            --tw-gradient-to: #f3e8ff var(--tw-gradient-to-position)
+        }
+
+        .to-purple-500 {
+            --tw-gradient-to: #a855f7 var(--tw-gradient-to-position)
+        }
+
+        .p-4 {
+            padding: 1rem
+        }
+
+        .p-6 {
+            padding: 1.5rem
+        }
+
+        .p-8 {
+            padding: 2rem
+        }
+
+        .px-3 {
+            padding-left: 0.75rem;
+            padding-right: 0.75rem
+        }
+
+        .px-4 {
+            padding-left: 1rem;
+            padding-right: 1rem
+        }
+
+        .px-6 {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem
+        }
+
+        .px-8 {
+            padding-left: 2rem;
+            padding-right: 2rem
+        }
+
+        .py-1 {
+            padding-top: 0.25rem;
+            padding-bottom: 0.25rem
+        }
+
+        .py-2 {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem
+        }
+
+        .py-3 {
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem
+        }
+
+        .py-8 {
+            padding-top: 2rem;
+            padding-bottom: 2rem
+        }
+
+        .text-center {
+            text-align: center
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+            line-height: 2.25rem
+        }
+
+        .text-4xl {
+            font-size: 2.25rem;
+            line-height: 2.5rem
+        }
+
+        .text-5xl {
+            font-size: 3rem;
+            line-height: 1
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem
+        }
+
+        .font-bold {
+            font-weight: 700
+        }
+
+        .text-blue-600 {
+            --tw-text-opacity: 1;
+            color: rgb(37 99 235 / var(--tw-text-opacity, 1))
+        }
+
+        .text-blue-700 {
+            --tw-text-opacity: 1;
+            color: rgb(29 78 216 / var(--tw-text-opacity, 1))
+        }
+
+        .text-gray-700 {
+            --tw-text-opacity: 1;
+            color: rgb(55 65 81 / var(--tw-text-opacity, 1))
+        }
+
+        .text-green-600 {
+            --tw-text-opacity: 1;
+            color: rgb(22 163 74 / var(--tw-text-opacity, 1))
+        }
+
+        .text-orange-600 {
+            --tw-text-opacity: 1;
+            color: rgb(234 88 12 / var(--tw-text-opacity, 1))
+        }
+
+        .text-orange-700 {
+            --tw-text-opacity: 1;
+            color: rgb(194 65 12 / var(--tw-text-opacity, 1))
+        }
+
+        .text-purple-600 {
+            --tw-text-opacity: 1;
+            color: rgb(147 51 234 / var(--tw-text-opacity, 1))
+        }
+
+        .text-purple-700 {
+            --tw-text-opacity: 1;
+            color: rgb(126 34 206 / var(--tw-text-opacity, 1))
+        }
+
+        .text-white {
+            --tw-text-opacity: 1;
+            color: rgb(255 255 255 / var(--tw-text-opacity, 1))
+        }
+
+        .text-yellow-600 {
+            --tw-text-opacity: 1;
+            color: rgb(202 138 4 / var(--tw-text-opacity, 1))
+        }
+
+        .text-yellow-700 {
+            --tw-text-opacity: 1;
+            color: rgb(161 98 7 / var(--tw-text-opacity, 1))
+        }
+
+        .text-yellow-900 {
+            --tw-text-opacity: 1;
+            color: rgb(113 63 18 / var(--tw-text-opacity, 1))
+        }
+
+        .opacity-50 {
+            opacity: 0.5
+        }
+
+        .shadow {
+            --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .shadow-lg {
+            --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .shadow-md {
+            --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .shadow-xl {
+            --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+            box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+        }
+
+        .transition-all {
+            transition-property: all;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms
+        }
+
+        .hover\:scale-105:hover {
+            --tw-scale-x: 1.05;
+            --tw-scale-y: 1.05;
+            transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))
+        }
+
+        .hover\:bg-blue-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(37 99 235 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-gray-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-orange-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(234 88 12 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-purple-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(147 51 234 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-red-600:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:bg-yellow-500:hover {
+            --tw-bg-opacity: 1;
+            background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1))
+        }
+
+        .hover\:from-blue-600:hover {
+            --tw-gradient-from: #2563eb var(--tw-gradient-from-position);
+            --tw-gradient-to: rgb(37 99 235 / 0) var(--tw-gradient-to-position);
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to)
+        }
+
+        .hover\:to-purple-600:hover {
+            --tw-gradient-to: #9333ea var(--tw-gradient-to-position)
+        }
+
+        .focus\:border-blue-500:focus {
+            --tw-border-opacity: 1;
+            border-color: rgb(59 130 246 / var(--tw-border-opacity, 1))
+        }
+
+        .focus\:border-purple-500:focus {
+            --tw-border-opacity: 1;
+            border-color: rgb(168 85 247 / var(--tw-border-opacity, 1))
+        }
+
+        .focus\:outline-none:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px
+        }
+
+        @media (min-width: 768px) {
+            .md\:w-1\/3 {
+                width: 33.333333%
+            }
+
+            .md\:w-2\/3 {
+                width: 66.666667%
+            }
+
+            .md\:grid-cols-2 {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .md\:flex-row {
+                flex-direction: row
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Tela 1: Cadastro de Jogadores -->
+    <div id="screen1" class="screen active bg-gradient-to-b from-blue-100 to-purple-100">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center mb-8">
+                <h1 class="text-5xl font-bold text-blue-600 mb-2">DesenhoAmigo</h1>
+                <p class="text-xl text-purple-600">Desenhe, Divirta-se e Faça Amigos!</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Jogador 1 -->
+                    <div class="bg-blue-50 rounded-xl p-6 border-4 border-blue-300">
+                        <h2 class="text-2xl font-bold text-blue-700 mb-4">Jogador 1</h2>
+                        <div class="mb-4">
+                            <label class="block text-blue-700 mb-2">Escolha seu avatar:</label>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="avatar-container">
+                                    <svg class="avatar border-4 border-blue-200 bg-blue-100" viewBox="0 0 100 100"
+                                        data-player="1" data-avatar="1">
+                                        <circle cx="50" cy="40" r="25" fill="#FFD700"></circle>
+                                        <circle cx="40" cy="35" r="5" fill="#000"></circle>
+                                        <circle cx="60" cy="35" r="5" fill="#000"></circle>
+                                        <path d="M40 55 Q50 65 60 55" stroke="#000" stroke-width="3" fill="none"></path>
+                                    </svg>
+                                </div>
+                                <div class="avatar-container">
+                                    <svg class="avatar border-4 border-blue-200 bg-blue-100" viewBox="0 0 100 100"
+                                        data-player="1" data-avatar="2">
+                                        <rect x="25" y="15" width="50" height="50" rx="10" fill="#FF6B6B"></rect>
+                                        <circle cx="40" cy="35" r="5" fill="#000"></circle>
+                                        <circle cx="60" cy="35" r="5" fill="#000"></circle>
+                                        <path d="M35 50 Q50 60 65 50" stroke="#000" stroke-width="3" fill="none"></path>
+                                    </svg>
+                                </div>
+                                <div class="avatar-container">
+                                    <svg class="avatar border-4 border-blue-200 bg-blue-100" viewBox="0 0 100 100"
+                                        data-player="1" data-avatar="3">
+                                        <polygon points="50,15 75,40 65,70 35,70 25,40" fill="#4CAF50"></polygon>
+                                        <circle cx="40" cy="40" r="5" fill="#000"></circle>
+                                        <circle cx="60" cy="40" r="5" fill="#000"></circle>
+                                        <path d="M40 55 Q50 45 60 55" stroke="#000" stroke-width="3" fill="none"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="player1Name" class="block text-blue-700 mb-2">Seu apelido:</label>
+                            <input type="text" id="player1Name"
+                                class="w-full px-4 py-2 rounded-lg border-2 border-blue-300 focus:border-blue-500 focus:outline-none"
+                                placeholder="Digite seu apelido">
+                        </div>
+                    </div>
+
+                    <!-- Jogador 2 -->
+                    <div class="bg-purple-50 rounded-xl p-6 border-4 border-purple-300">
+                        <h2 class="text-2xl font-bold text-purple-700 mb-4">Jogador 2</h2>
+                        <div class="mb-4">
+                            <label class="block text-purple-700 mb-2">Escolha seu avatar:</label>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="avatar-container">
+                                    <svg class="avatar border-4 border-purple-200 bg-purple-100" viewBox="0 0 100 100"
+                                        data-player="2" data-avatar="1">
+                                        <circle cx="50" cy="40" r="25" fill="#9C27B0"></circle>
+                                        <circle cx="40" cy="35" r="5" fill="#FFF"></circle>
+                                        <circle cx="60" cy="35" r="5" fill="#FFF"></circle>
+                                        <path d="M40 55 Q50 65 60 55" stroke="#FFF" stroke-width="3" fill="none"></path>
+                                    </svg>
+                                </div>
+                                <div class="avatar-container">
+                                    <svg class="avatar border-4 border-purple-200 bg-purple-100" viewBox="0 0 100 100"
+                                        data-player="2" data-avatar="2">
+                                        <rect x="25" y="15" width="50" height="50" rx="10" fill="#3F51B5"></rect>
+                                        <circle cx="40" cy="35" r="5" fill="#FFF"></circle>
+                                        <circle cx="60" cy="35" r="5" fill="#FFF"></circle>
+                                        <path d="M35 50 Q50 60 65 50" stroke="#FFF" stroke-width="3" fill="none"></path>
+                                    </svg>
+                                </div>
+                                <div class="avatar-container">
+                                    <svg class="avatar border-4 border-purple-200 bg-purple-100" viewBox="0 0 100 100"
+                                        data-player="2" data-avatar="3">
+                                        <polygon points="50,15 75,40 65,70 35,70 25,40" fill="#FF9800"></polygon>
+                                        <circle cx="40" cy="40" r="5" fill="#FFF"></circle>
+                                        <circle cx="60" cy="40" r="5" fill="#FFF"></circle>
+                                        <path d="M40 55 Q50 45 60 55" stroke="#FFF" stroke-width="3" fill="none"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="player2Name" class="block text-purple-700 mb-2">Seu apelido:</label>
+                            <input type="text" id="player2Name"
+                                class="w-full px-4 py-2 rounded-lg border-2 border-purple-300 focus:border-purple-500 focus:outline-none"
+                                placeholder="Digite seu apelido">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button id="startGameBtn"
+                        class="px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-xl font-bold rounded-full shadow-lg hover:from-blue-600 hover:to-purple-600 transform hover:scale-105 transition-all opacity-50 cursor-not-allowed"
+                        disabled="">
+                        Começar a Jogar!
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button id="aboutBtn"
+                    class="px-6 py-2 bg-yellow-400 text-yellow-900 rounded-full shadow-md hover:bg-yellow-500 transform hover:scale-105 transition-all">
+                    Sobre o Projeto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela 2: Jogo de Desenho -->
+    <div id="screen2" class="screen bg-gradient-to-b from-blue-50 to-green-50">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center mb-6">
+                <h1 class="text-4xl font-bold text-blue-600">DesenhoAmigo</h1>
+                <p class="text-xl text-green-600 mt-2">Desenhem juntos e divirtam-se!</p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 items-center justify-center">
+                <!-- Jogador 1 -->
+                <div id="player1Panel" class="bg-blue-100 rounded-xl p-4 border-4 border-blue-300 w-64 text-center">
+                    <div class="avatar-display mx-auto mb-2">
+                        <svg id="player1Avatar" class="avatar border-4 border-blue-400 bg-white mx-auto"
+                            viewBox="0 0 100 100">
+                            <circle cx="50" cy="40" r="25" fill="#FFD700"></circle>
+                            <circle cx="40" cy="35" r="5" fill="#000"></circle>
+                            <circle cx="60" cy="35" r="5" fill="#000"></circle>
+                            <path d="M40 55 Q50 65 60 55" stroke="#000" stroke-width="3" fill="none"></path>
+                        </svg>
+                    </div>
+                    <h3 id="player1DisplayName" class="text-xl font-bold text-blue-700">Jogador 1</h3>
+                    <div id="player1Status" class="mt-2 py-1 px-3 bg-green-500 text-white rounded-full inline-block">
+                        Sua vez!
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-blue-700 font-bold">Tempo:</span>
+                        <span id="player1Timer" class="text-blue-700">30s</span>
+                    </div>
+                </div>
+
+                <!-- Área de Desenho -->
+                <div class="flex flex-col items-center">
+                    <div class="canvas-container bg-white">
+                        <canvas id="drawingCanvas" width="600" height="400"></canvas>
+                    </div>
+
+                    <div class="mt-4 flex flex-wrap justify-center gap-4">
+                        <div class="color-picker">
+                            <div class="color-option selected" style="background-color: #000000" data-color="#000000">
+                            </div>
+                            <div class="color-option" style="background-color: #FF0000" data-color="#FF0000"></div>
+                            <div class="color-option" style="background-color: #00FF00" data-color="#00FF00"></div>
+                            <div class="color-option" style="background-color: #0000FF" data-color="#0000FF"></div>
+                            <div class="color-option" style="background-color: #FFFF00" data-color="#FFFF00"></div>
+                            <div class="color-option" style="background-color: #FF00FF" data-color="#FF00FF"></div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <span class="mr-2 text-blue-700">Tamanho:</span>
+                            <input type="range" min="1" max="20" value="5" class="brush-size" id="brushSize">
+                        </div>
+
+                        <button id="clearBtn" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600">
+                            Limpar
+                        </button>
+                    </div>
+
+                    <div class="mt-4 text-center">
+                        <p class="text-lg text-blue-700 font-bold mb-2">Tema: <span id="drawingTheme">Animais</span></p>
+                        <button id="finishTurnBtn"
+                            class="px-6 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600">
+                            Finalizar Turno
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Jogador 2 -->
+                <div id="player2Panel"
+                    class="bg-purple-100 rounded-xl p-4 border-4 border-purple-300 w-64 text-center player-waiting">
+                    <div class="avatar-display mx-auto mb-2">
+                        <svg id="player2Avatar" class="avatar border-4 border-purple-400 bg-white mx-auto"
+                            viewBox="0 0 100 100">
+                            <circle cx="50" cy="40" r="25" fill="#9C27B0"></circle>
+                            <circle cx="40" cy="35" r="5" fill="#FFF"></circle>
+                            <circle cx="60" cy="35" r="5" fill="#FFF"></circle>
+                            <path d="M40 55 Q50 65 60 55" stroke="#FFF" stroke-width="3" fill="none"></path>
+                        </svg>
+                    </div>
+                    <h3 id="player2DisplayName" class="text-xl font-bold text-purple-700">Jogador 2</h3>
+                    <div id="player2Status" class="mt-2 py-1 px-3 bg-gray-400 text-white rounded-full inline-block">
+                        Aguardando...
+                    </div>
+                    <div class="mt-4">
+                        <span class="text-purple-700 font-bold">Tempo:</span>
+                        <span id="player2Timer" class="text-purple-700">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button id="backToMenuBtn"
+                    class="px-6 py-2 bg-gray-500 text-white rounded-full shadow-md hover:bg-gray-600 transform hover:scale-105 transition-all">
+                    Voltar ao Menu
+                </button>
+                <button id="goToAboutBtn"
+                    class="px-6 py-2 bg-yellow-400 text-yellow-900 rounded-full shadow-md hover:bg-yellow-500 transform hover:scale-105 transition-all ml-4">
+                    Sobre o Projeto
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tela 3: Sobre o Projeto -->
+    <div id="screen3" class="screen bg-gradient-to-b from-yellow-50 to-orange-50">
+        <div class="container mx-auto px-4 py-8">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl font-bold text-yellow-600">Sobre o DesenhoAmigo</h1>
+                <p class="text-xl text-orange-600 mt-2">Um projeto para incentivar a interação entre crianças</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 mb-12">
+                <h2 class="text-2xl font-bold text-yellow-600 mb-4">Nossa Missão</h2>
+                <p class="text-lg mb-6">
+                    O DesenhoAmigo foi criado com o objetivo de incentivar a interação entre as crianças para combater o
+                    isolamento social,
+                    contribuindo para a diminuição de casos de depressão na adolescência. Acreditamos que atividades
+                    colaborativas e criativas
+                    são fundamentais para o desenvolvimento saudável das relações sociais desde a infância.
+                </p>
+
+                <div class="flex flex-col md:flex-row gap-8 items-center mb-8">
+                    <div class="md:w-1/3">
+                        <div class="rounded-full overflow-hidden border-4 border-yellow-300 w-48 h-48 mx-auto">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <circle cx="50" cy="35" r="25" fill="#FFD700"></circle>
+                                <rect x="25" y="60" width="50" height="30" fill="#3B82F6"></rect>
+                                <circle cx="40" cy="30" r="4" fill="#000"></circle>
+                                <circle cx="60" cy="30" r="4" fill="#000"></circle>
+                                <path d="M40 45 Q50 55 60 45" stroke="#000" stroke-width="2" fill="none"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3">
+                        <h3 class="text-xl font-bold text-yellow-600 mb-2">Minha História</h3>
+                        <p class="text-gray-700">
+                            Olá! Sou o criador do DesenhoAmigo. Durante minha formação em Análise e Desenvolvimento de
+                            Sistemas,
+                            percebi como a tecnologia pode ser uma ferramenta poderosa para promover conexões
+                            significativas entre as pessoas.
+                            Baseado em minhas próprias experiências e pesquisas, desenvolvi este projeto para criar um
+                            espaço onde crianças possam
+                            interagir de forma divertida e criativa, fortalecendo laços sociais e desenvolvendo
+                            habilidades de comunicação.
+                        </p>
+                    </div>
+                </div>
+
+                <h2 class="text-2xl font-bold text-yellow-600 mb-4">Resultados da Pesquisa</h2>
+                <p class="text-lg mb-6">
+                    Uma pesquisa realizada com alunos do curso de ADS da minha faculdade revelou dados importantes sobre
+                    o isolamento social na infância:
+                </p>
+
+                <div class="bg-yellow-50 p-6 rounded-xl mb-8">
+                    <h3 class="text-xl font-bold text-yellow-700 mb-4">Principais Descobertas</h3>
+
+                    <div class="chart-container mb-8">
+                        <h4 class="text-lg font-bold text-yellow-600 mb-2">Motivos de Afastamento Social na Infância
+                        </h4>
+                        <div class="relative h-64 border-b-2 border-l-2 border-gray-300">
+                            <div class="bar" style="left: 40px; height: 80%; width: 60px;" data-percentage="80%">
+                                <div class="text-center mt-2 font-bold">80%</div>
+                                <div class="text-center mt-1">Bullying</div>
+                            </div>
+                            <div class="bar" style="left: 140px; height: 45%; width: 60px; background-color: #FF6B6B;"
+                                data-percentage="45%">
+                                <div class="text-center mt-2 font-bold">45%</div>
+                                <div class="text-center mt-1">Timidez</div>
+                            </div>
+                            <div class="bar" style="left: 240px; height: 30%; width: 60px; background-color: #4CAF50;"
+                                data-percentage="30%">
+                                <div class="text-center mt-2 font-bold">30%</div>
+                                <div class="text-center mt-1">Mudança</div>
+                            </div>
+                            <div class="bar" style="left: 340px; height: 25%; width: 60px; background-color: #9C27B0;"
+                                data-percentage="25%">
+                                <div class="text-center mt-2 font-bold">25%</div>
+                                <div class="text-center mt-1">Outros</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <div class="bubble"
+                                style="width: 160px; height: 160px; left: 50%; top: 50%; transform: translate(-50%, -50%);">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">80%</div>
+                                    <div class="text-sm">se afastaram de outras crianças</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <div class="bubble"
+                                style="width: 160px; height: 160px; left: 50%; top: 50%; transform: translate(-50%, -50%); background-color: #FF6B6B;">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold">80%</div>
+                                    <div class="text-sm">sentem que isso os afetou</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="text-2xl font-bold text-yellow-600 mb-4">Contribua com Nossa Pesquisa</h2>
+                <div class="bg-orange-50 p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-orange-700 mb-4">Quiz Rápido</h3>
+
+                    <div class="mb-6">
+                        <p class="text-lg font-bold text-orange-600 mb-2">Você já se sentiu isolado(a) durante a
+                            infância?</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="sim">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="isolation" value="sim" class="mr-2">
+                                    <span>Sim, frequentemente</span>
+                                </label>
+                            </div>
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="as-vezes">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="isolation" value="as-vezes" class="mr-2">
+                                    <span>Às vezes</span>
+                                </label>
+                            </div>
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="raramente">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="isolation" value="raramente" class="mr-2">
+                                    <span>Raramente</span>
+                                </label>
+                            </div>
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="nunca">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="isolation" value="nunca" class="mr-2">
+                                    <span>Nunca</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <p class="text-lg font-bold text-orange-600 mb-2">Qual foi o principal motivo?</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="bullying">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="reason" value="bullying" class="mr-2">
+                                    <span>Bullying</span>
+                                </label>
+                            </div>
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="timidez">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="reason" value="timidez" class="mr-2">
+                                    <span>Timidez</span>
+                                </label>
+                            </div>
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="mudanca">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="reason" value="mudanca" class="mr-2">
+                                    <span>Mudança de escola/cidade</span>
+                                </label>
+                            </div>
+                            <div class="quiz-option bg-white p-4 rounded-lg shadow" data-answer="outros">
+                                <label class="flex items-center cursor-pointer">
+                                    <input type="radio" name="reason" value="outros" class="mr-2">
+                                    <span>Outros motivos</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button id="submitQuizBtn"
+                            class="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600">
+                            Enviar Respostas
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button id="backToMenuFromAboutBtn"
+                    class="px-6 py-2 bg-gray-500 text-white rounded-full shadow-md hover:bg-gray-600 transform hover:scale-105 transition-all">
+                    Voltar ao Menu
+                </button>
+                <button id="backToGameBtn"
+                    class="px-6 py-2 bg-blue-500 text-white rounded-full shadow-md hover:bg-blue-600 transform hover:scale-105 transition-all ml-4">
+                    Voltar ao Jogo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Variáveis globais
+            let currentScreen = 1;
+            let player1 = { name: '', avatar: null, selected: false };
+            let player2 = { name: '', avatar: null, selected: false };
+            let currentPlayer = 1;
+            let drawingCanvas = document.getElementById('drawingCanvas');
+            let ctx = drawingCanvas.getContext('2d');
+            let isDrawing = false;
+            let currentColor = '#000000';
+            let currentSize = 5;
+            let lastX = 0;
+            let lastY = 0;
+            let timer = 30;
+            let timerInterval;
+            let quizSubmitted = false;
+
+            // Temas para desenho
+            const themes = [
+                'Animais', 'Esportes', 'Comidas', 'Natureza',
+                'Espaço', 'Transportes', 'Personagens', 'Monstros'
+            ];
+
+            // Configuração inicial
+            setupAvatarSelection();
+            setupCanvas();
+            setupColorPicker();
+            setupBrushSize();
+            setupButtons();
+
+            // Funções de configuração
+            function setupAvatarSelection() {
+                const avatars = document.querySelectorAll('.avatar');
+                avatars.forEach(avatar => {
+                    avatar.addEventListener('click', function () {
+                        const player = this.dataset.player;
+                        const avatarId = this.dataset.avatar;
+
+                        // Remover seleção anterior
+                        document.querySelectorAll(`.avatar[data-player="${player}"]`).forEach(av => {
+                            av.classList.remove('selected');
+                        });
+
+                        // Adicionar seleção atual
+                        this.classList.add('selected');
+
+                        // Armazenar seleção
+                        if (player === '1') {
+                            player1.avatar = avatarId;
+                            player1.selected = true;
+                            player1.avatarSVG = this.outerHTML;
+                        } else {
+                            player2.avatar = avatarId;
+                            player2.selected = true;
+                            player2.avatarSVG = this.outerHTML;
+                        }
+
+                        // Verificar se podemos habilitar o botão de início
+                        checkStartButton();
+                    });
+                });
+
+                // Campos de nome
+                document.getElementById('player1Name').addEventListener('input', function () {
+                    player1.name = this.value.trim();
+                    checkStartButton();
+                });
+
+                document.getElementById('player2Name').addEventListener('input', function () {
+                    player2.name = this.value.trim();
+                    checkStartButton();
+                });
+            }
+
+            function checkStartButton() {
+                const startBtn = document.getElementById('startGameBtn');
+                if (player1.selected && player2.selected && player1.name && player2.name) {
+                    startBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                    startBtn.disabled = false;
+                } else {
+                    startBtn.classList.add('opacity-50', 'cursor-not-allowed');
+                    startBtn.disabled = true;
+                }
+            }   
+
+            function setupCanvas() {
+                // Configurar canvas para desenho
+                drawingCanvas.width = 600;
+                drawingCanvas.height = 400;
+                ctx.lineJoin = 'round';
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = currentSize;
+
+                // Eventos do mouse
+                drawingCanvas.addEventListener('mousedown', startDrawing);
+                drawingCanvas.addEventListener('mousemove', draw);
+                drawingCanvas.addEventListener('mouseup', stopDrawing);
+                drawingCanvas.addEventListener('mouseout', stopDrawing);
+
+                // Eventos de toque para dispositivos móveis
+                drawingCanvas.addEventListener('touchstart', handleTouch);
+                drawingCanvas.addEventListener('touchmove', handleTouch);
+                drawingCanvas.addEventListener('touchend', stopDrawing);
+            }
+
+            function startDrawing(e) {
+                isDrawing = true;
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            }
+
+            function draw(e) {
+                if (!isDrawing) return;
+
+                ctx.beginPath();
+                ctx.moveTo(lastX, lastY);
+                ctx.lineTo(e.offsetX, e.offsetY);
+                ctx.stroke();
+
+                [lastX, lastY] = [e.offsetX, e.offsetY];
+            }
+
+            function stopDrawing() {
+                isDrawing = false;
+            }
+
+            function handleTouch(e) {
+                e.preventDefault();
+
+                const touch = e.touches[0];
+                const rect = drawingCanvas.getBoundingClientRect();
+                const offsetX = touch.clientX - rect.left;
+                const offsetY = touch.clientY - rect.top;
+
+                if (e.type === 'touchstart') {
+                    isDrawing = true;
+                    [lastX, lastY] = [offsetX, offsetY];
+                } else if (e.type === 'touchmove' && isDrawing) {
+                    ctx.beginPath();
+                    ctx.moveTo(lastX, lastY);
+                    ctx.lineTo(offsetX, offsetY);
+                    ctx.stroke();
+
+                    [lastX, lastY] = [offsetX, offsetY];
+                }
+            }
+
+            function setupColorPicker() {
+                const colorOptions = document.querySelectorAll('.color-option');
+                colorOptions.forEach(option => {
+                    option.addEventListener('click', function () {
+                        // Remover seleção anterior
+                        document.querySelectorAll('.color-option').forEach(opt => {
+                            opt.classList.remove('selected');
+                        });
+
+                        // Adicionar seleção atual
+                        this.classList.add('selected');
+
+                        // Atualizar cor
+                        currentColor = this.dataset.color;
+                        ctx.strokeStyle = currentColor;
+                    });
+                });
+            }
+
+            function setupBrushSize() {
+                const brushSize = document.getElementById('brushSize');
+                brushSize.addEventListener('input', function () {
+                    currentSize = this.value;
+                    ctx.lineWidth = currentSize;
+                });
+            }
+
+            function setupButtons() {
+                // Botão de início do jogo
+                document.getElementById('startGameBtn').addEventListener('click', function () {
+                    if (player1.selected && player2.selected && player1.name && player2.name) {
+                        // Atualizar informações dos jogadores na tela de jogo
+                        document.getElementById('player1DisplayName').textContent = player1.name;
+                        document.getElementById('player2DisplayName').textContent = player2.name;
+
+                        // Atualizar avatares
+                        if (player1.avatarSVG) {
+                            document.getElementById('player1Avatar').outerHTML = player1.avatarSVG;
+                        }
+                        if (player2.avatarSVG) {
+                            document.getElementById('player2Avatar').outerHTML = player2.avatarSVG;
+                        }
+
+                        // Definir tema aleatório
+                        const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+                        document.getElementById('drawingTheme').textContent = randomTheme;
+
+                        // Iniciar timer
+                        startTimer();
+
+                        // Mudar para a tela de jogo
+                        changeScreen(2);
+                    }
+                });
+
+                // Botão de limpar canvas
+                document.getElementById('clearBtn').addEventListener('click', function () {
+                    ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+                });
+
+                // Botão de finalizar turno
+                document.getElementById('finishTurnBtn').addEventListener('click', function () {
+                    switchPlayer();
+                });
+
+                // Botões de navegação
+                document.getElementById('aboutBtn').addEventListener('click', function () {
+                    changeScreen(3);
+                });
+
+                document.getElementById('backToMenuBtn').addEventListener('click', function () {
+                    changeScreen(1);
+                });
+
+                document.getElementById('goToAboutBtn').addEventListener('click', function () {
+                    changeScreen(3);
+                });
+
+                document.getElementById('backToMenuFromAboutBtn').addEventListener('click', function () {
+                    changeScreen(1);
+                });
+
+                document.getElementById('backToGameBtn').addEventListener('click', function () {
+                    changeScreen(2);
+                });
+
+                // Botão de envio do quiz
+                document.getElementById('submitQuizBtn').addEventListener('click', function () {
+                    if (!quizSubmitted) {
+                        const isolation = document.querySelector('input[name="isolation"]:checked');
+                        const reason = document.querySelector('input[name="reason"]:checked');
+
+                        if (isolation && reason) {
+                            quizSubmitted = true;
+                            this.textContent = "Respostas Enviadas!";
+                            this.classList.remove('bg-orange-500', 'hover:bg-orange-600');
+                            this.classList.add('bg-green-500', 'hover:bg-green-600');
+
+                            // Animação de confete
+                            createConfetti();
+
+                            // Simular atualização do gráfico
+                            const bars = document.querySelectorAll('.bar');
+                            bars.forEach(bar => {
+                                const currentHeight = parseInt(bar.style.height);
+                                if (bar.style.left === '40px') { // Bullying bar
+                                    bar.style.height = (currentHeight + 2) + '%';
+                                    bar.querySelector('div').textContent = (parseInt(bar.dataset.percentage) + 2) + '%';
+                                }
+                            });
+                        } else {
+                            alert("Por favor, responda todas as perguntas antes de enviar.");
+                        }
+                    }
+                });
+            }
+
+            function changeScreen(screenNumber) {
+                // Esconder todas as telas
+                document.querySelectorAll('.screen').forEach(screen => {
+                    screen.classList.remove('active');
+                });
+
+                // Mostrar a tela selecionada
+                document.getElementById(`screen${screenNumber}`).classList.add('active');
+
+                // Atualizar tela atual
+                currentScreen = screenNumber;
+
+                // Se voltando para a tela 1, resetar o jogo
+                if (screenNumber === 1) {
+                    resetGame();
+                }
+            }
+
+            function startTimer() {
+                clearInterval(timerInterval);
+                timer = 30;
+                updateTimerDisplay();
+
+                timerInterval = setInterval(function () {
+                    timer--;
+                    updateTimerDisplay();
+
+                    if (timer <= 0) {
+                        clearInterval(timerInterval);
+                        switchPlayer();
+                    }
+                }, 1000);
+            }
+
+            function updateTimerDisplay() {
+                if (currentPlayer === 1) {
+                    document.getElementById('player1Timer').textContent = timer + 's';
+                } else {
+                    document.getElementById('player2Timer').textContent = timer + 's';
+                }
+            }
+
+            function switchPlayer() {
+                // Alternar jogador atual
+                currentPlayer = currentPlayer === 1 ? 2 : 1;
+
+                // Atualizar interface
+                if (currentPlayer === 1) {
+                    document.getElementById('player1Panel').classList.remove('player-waiting');
+                    document.getElementById('player2Panel').classList.add('player-waiting');
+                    document.getElementById('player1Status').textContent = 'Sua vez!';
+                    document.getElementById('player1Status').classList.remove('bg-gray-400');
+                    document.getElementById('player1Status').classList.add('bg-green-500');
+                    document.getElementById('player2Status').textContent = 'Aguardando...';
+                    document.getElementById('player2Status').classList.remove('bg-green-500');
+                    document.getElementById('player2Status').classList.add('bg-gray-400');
+                } else {
+                    document.getElementById('player2Panel').classList.remove('player-waiting');
+                    document.getElementById('player1Panel').classList.add('player-waiting');
+                    document.getElementById('player2Status').textContent = 'Sua vez!';
+                    document.getElementById('player2Status').classList.remove('bg-gray-400');
+                    document.getElementById('player2Status').classList.add('bg-green-500');
+                    document.getElementById('player1Status').textContent = 'Aguardando...';
+                    document.getElementById('player1Status').classList.remove('bg-green-500');
+                    document.getElementById('player1Status').classList.add('bg-gray-400');
+                }
+
+                // Definir novo tema aleatório
+                const randomTheme = themes[Math.floor(Math.random() * themes.length)];
+                document.getElementById('drawingTheme').textContent = randomTheme;
+
+                // Reiniciar timer
+                startTimer();
+            }
+
+            function resetGame() {
+                // Limpar timer
+                clearInterval(timerInterval);
+
+                // Limpar canvas
+                ctx.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+
+                // Resetar jogador atual
+                currentPlayer = 1;
+
+                // Resetar interface
+                document.getElementById('player1Panel').classList.remove('player-waiting');
+                document.getElementById('player2Panel').classList.add('player-waiting');
+                document.getElementById('player1Status').textContent = 'Sua vez!';
+                document.getElementById('player1Status').classList.remove('bg-gray-400');
+                document.getElementById('player1Status').classList.add('bg-green-500');
+                document.getElementById('player2Status').textContent = 'Aguardando...';
+                document.getElementById('player2Status').classList.remove('bg-green-500');
+                document.getElementById('player2Status').classList.add('bg-gray-400');
+            }
+
+            function createConfetti() {
+                const colors = ['#FF0000', '#00FF00', '#0000FF', '#FFFF00', '#FF00FF', '#00FFFF'];
+
+                for (let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.top = '-10px';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.opacity = 1;
+                    confetti.style.transform = 'rotate(' + Math.random() * 360 + 'deg)';
+
+                    document.body.appendChild(confetti);
+
+                    const animationDuration = Math.random() * 3 + 2;
+
+                    confetti.animate([
+                        { transform: 'translateY(0) rotate(0)', opacity: 1 },
+                        { transform: 'translateY(' + (Math.random() * 500 + 200) + 'px) rotate(' + (Math.random() * 360) + 'deg)', opacity: 0 }
+                    ], {
+                        duration: animationDuration * 1000,
+                        easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                    }).onfinish = function () {
+                        confetti.remove();
+                    };
+                }
+            }
+
+            // Inicializar botão de início como desabilitado
+            document.getElementById('startGameBtn').classList.add('opacity-50', 'cursor-not-allowed');
+            document.getElementById('startGameBtn').disabled = true;
+        });
+    </script>
+    <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'94391984f743d838',t:'MTc0Nzg4MzIwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
+    <iframe height="1" width="1"
+        style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+</body>
+
+</html>

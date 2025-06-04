@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD One Piece</title>
+</head>
+
+<body
+    style="text-align: center; display: flex; margin: 0; height: 100vh; width: 100vw; background-image: url(image/onepiece.jpg); background-repeat: no-repeat; background-size: contain; font-family: Arial, Helvetica, sans-serif;">
+
+    <div style="margin: 0px 20px; color: white; width: 70%;">
+        <h1 style="font-weight: 700; color: yellow; font-size: 35px;">CRUD One Piece</h1>
+        <div class="container_principal" style="display: flex; justify-content: space-evenly;">
+            <div class="container" style="width: 100%;">
+                <h2>Cadastrar Estoque de Comidas</h2>
+                <input type="text" id="input_comida" />
+                <button onclick="cadastrar()">Cadastrar</button>
+                <button onclick="verificar()">Verificar Quantidade</button>
+                <div id="div_mensagem" style="
+                width: 450px;
+                height: 100px;
+                background-color: rgb(243, 243, 243);
+                margin: 20px;
+                padding: 15px 20px;
+                color: black;
+              "></div>
+                <h2>Nome de uma Comida</h2>
+                <input type="text" id="input_nome_comida" />
+                <button onclick="pesquisar()">Pesquisar</button>
+                <div id="div_resultado" style="
+                width: 450px;
+                height: 100px;
+                background-color: rgb(243, 243, 243);
+                margin: 20px;
+                padding: 15px 20px;
+                color: black;
+              "></div>
+            </div>
+            <div class="container">
+                <h2>Estoque Geral</h2>
+                <button onclick="exibir()">Exibir</button>
+                <div id="div_historico" style="
+                width: 200px;
+                height: 350px;
+                background-color: rgb(243, 243, 243);
+                margin: 20px;
+                padding: 15px 20px;
+                color: black;
+                text-align: left;
+              "></div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container"
+        style="height: 100%; width: 45%; background-color: rgb(95, 97, 84); color: white; display: block; justify-items: center; align-content: center;">
+        <h2>EDIÇÃO DE ESTOQUE</h2>
+        <div id="div_CRUD" style="
+            width: 410px;
+            height: 320px;
+            background-color: rgb(243, 243, 243);
+            margin: 20px;
+            padding: 15px 20px;
+            color: black;
+          ">
+          <h3>Alterar Nome de Comida</h3>
+            Nome Atual:
+            <input type="text" id="input_nome_atual"><br>
+
+            Novo Nome:
+            <input type="text" id="input_novo_nome"><br><br>
+
+            <button onclick="alterar_nome()">Alterar Nome</button>
+            <span id="span_resposta"><br><br></span>
+            <hr>
+
+            <h3>Deletar Comida do Estoque</h3>
+            Deletar Comida:
+            <input type="text" id="input_nome_removido"><br><br>
+            <button onclick="remover()">Remover Comida</button>
+            <span id="span_resposta2"></span>
+        </div>
+
+
+        <div
+            style="width: 350px; height: 150px; background-image: url(image/one_piece.gif); background-repeat: no-repeat; background-size: cover;">
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var lista_estoque = ["Batata", "Arroz", "Batata", "Arroz", "Batata", "Arroz", "Batata", "Arroz", "Batata", "Arroz", "Tomate", "Salsicha", "Kabocha", "Pepino", "Salsicha", "Kabocha", "Pepino", "Salsicha", "Kabocha", "Pepino", "Salsicha", "Kabocha", "Pepino"];
+
+    function cadastrar() {
+        var comida = input_comida.value;
+        lista_estoque.push(comida);
+    }
+
+    function verificar() {
+        var numero_itens = lista_estoque.length;
+        var mensagem = "";
+
+        if (numero_itens >= 0 && numero_itens <= 2) {
+            mensagem = `Desse jeito, o Luffy devora até o navio`;
+        } else if (numero_itens >= 3 && numero_itens <= 7) {
+            mensagem = `O comilão do Luffy não vai deixar sobrar nenhuma comida`;
+        } else if (numero_itens >= 8 && numero_itens <= 10) {
+            mensagem = `Assim, talvez sobre um pouco para a tripulação`;
+        } else {
+            mensagem = `Desse jeito vai ter comida para todo mundo e ainda consigo guardar um pouco para a senhorita Nami!`;
+        }
+        div_mensagem.innerHTML = `<br>${mensagem}<br>`;
+    }
+
+    function pesquisar() {
+        var numero_itens = lista_estoque.length;
+        var nome_comida = input_nome_comida.value;
+        var quantidade_comida_pesquisada = 0;
+        var resultado = "";
+
+        // começa o contador em 0
+        // enquanto o contador for menor que o tamanho da lista
+        // valida a comida e depois incrementa o contador
+        for (var i = 0; i < numero_itens; i++) {
+            if (nome_comida == lista_estoque[i]) {
+                quantidade_comida_pesquisada++;
+            }
+        }
+        if (quantidade_comida_pesquisada == 1) {
+            resultado = `Temos a comida <b>${nome_comida}</b> e há <b>${quantidade_comida_pesquisada}</b> unidade dela`;
+        } else if (quantidade_comida_pesquisada > 1) {
+            resultado = `Temos a comida <b>${nome_comida}</b> e há <b>${quantidade_comida_pesquisada}</b> unidades dela`;
+        } else {
+            resultado = `Alguém vai ter que comprar <b>${nome_comida}</b>, tá fazendo falta...`;
+        }
+        div_resultado.innerHTML = `<br>${resultado}<br>`;
+    }
+
+    function exibir() {
+        var numero_itens = lista_estoque.length;
+        var lista_nome_comida_unico = [];
+        var historico = "";
+
+        for (var i = 0; i < numero_itens; i++) {
+            var comida_atual = lista_estoque[i];
+            var quantidade_comida = 0;
+
+            if (!lista_nome_comida_unico.includes(comida_atual)) {
+                for (var n = 0; n < numero_itens; n++) {
+                    if (comida_atual == lista_estoque[n]) {
+                        quantidade_comida++;
+                    }
+                }
+                if (quantidade_comida == 1) {
+                    historico += `- <b>${comida_atual}</b> (${quantidade_comida} unidade)<br>`;
+                } else {
+                    historico += `- <b>${comida_atual}</b> (${quantidade_comida} unidades)<br>`;
+                }
+                lista_nome_comida_unico.push(comida_atual);
+            }
+        }
+        div_historico.innerHTML = `<br>${historico}<br>`;
+    }
+
+    function alterar_nome(){
+        var numero_itens = lista_estoque.length;
+        var nome_atual = input_nome_atual.value;
+        var novo_nome = input_novo_nome.value;
+        var resposta = "";
+
+        if (lista_estoque.includes(nome_atual)){
+            for (var i = 0; i < numero_itens; i++){
+                if (lista_estoque[i] == nome_atual){
+                    lista_estoque[i] = novo_nome;
+                }
+            }
+            resposta = `<p style= "color: green; font-size: 12px;">A comida <b>${nome_atual}</b> foi alterada para <b>${novo_nome}</b>.</p>`;
+        }else {
+            resposta = `<p style= "color: red; font-size: 12px;">A comida <b>${nome_atual}</b> não foi encontrada no estoque.</p>`;
+        }
+        span_resposta.innerHTML = resposta;
+    }
+
+    function remover(){
+        var numero_itens = lista_estoque.length;
+        var nome_removido = input_nome_removido.value;
+        var resposta2 = "";
+
+        if (lista_estoque.includes(nome_removido)){
+            for (var i = 0; i < numero_itens; i++){
+                if (lista_estoque[i] == nome_removido){
+                    lista_estoque.splice(i, 1);
+                }
+            }
+            resposta2 = `<p style= "color: green; font-size: 12px;">A comida ${nome_removido} foi removida do estoque.</p>`;
+        }else {
+            resposta2 = `<p style= "color: red; font-size: 12px;">A comida <b>${nome_removido}</b> não está no estoque.</p>`;
+        }
+        span_resposta2.innerHTML = resposta2;
+    }
+
+    function cadastrar
+
+
+</script>
