@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Json 2</title>
+</head>
+
+<body>
+    <h3>
+        JSON = Javascript ON <br>
+        ON = Obeject Notation <br>
+        Javascript Objeto Notação, marcação, representação através de símbolos. <br>
+        Criar objetos em JS. <br>
+        Um objeto = uma Entidade <br>
+        Objeto tem características <br>
+        Chave: Valor
+    </h3>
+    <hr><br>
+
+    <label for="input_nome_responsavel">Nome do Responsável:</label>
+    <input type="text" id="input_nome_responsavel"><br><br>
+
+    <label for="input_nome">Nome:</label>
+    <input type="text" id="input_nome"><br><br>
+
+    <label for="input_idade">Idade:</label>
+    <input type="text" id="input_idade"><br><br>
+
+    <button onclick="cumprimentar()">Cumprimentar</button><br><br>
+    <div id="div_mensagem" style="color: red; font-weight: 700;"></div>
+</body>
+
+</html>
+<script>
+    function cumprimentar() {
+
+        // Facilitar sua estruturação das variáveis
+        var pessoa = {
+            nome: input_nome.value,
+            idade: input_idade.value,
+            responsavel: input_nome_responsavel.value
+        }
+
+        div_mensagem.innerHTML = `Olá ${pessoa.nome}, você tem ${pessoa.idade} anos. E seu responsável é ${pessoa.responsavel}.`;
+    }
+</script>
