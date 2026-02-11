@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="background-color: rgba(255, 238, 0, 0.603); padding: 50px;">
+        <p>Nome :
+        <input type="text" id="input_nome"></p>
+
+        <button onclick="adicionar()">Cadastrar</button>
+        <button onclick="exibir()">Listar Filmes</button>
+
+        <p>De :
+        <input type="text" id="input_de"></p>
+
+        <p>Até :
+        <input type="text" id="input_ate"></p>
+
+        <button onclick="filtrar()">Filtrar Filmes</button>
+
+        
+        <div id="div_mensagem"></div>
+    </div><br>
+</body>
+</html>
+<script>
+
+    var lista_nomes = [];
+
+    function adicionar() {
+        var nome = input_nome.value;
+        lista_nomes.push(nome);
+    }
+
+    function exibir() {
+        var mensagem = "";
+        for (var i = lista_nomes.length - 1; i >= 0; i--) {
+            mensagem += `${i+1} - ${lista_nomes[i]}<br>`;
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+    function filtrar() {
+        var de = Number(input_de.value);
+        var ate = Number(input_ate.value);
+        var mensagem = "";
+
+        for (var i = lista_nomes.length -1; i >= 0; i--) {
+            if (i <= de && i > ate) {
+                mensagem += `${i} - ${lista_idades[i]} <br>`;
+            }
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+    
+</script>

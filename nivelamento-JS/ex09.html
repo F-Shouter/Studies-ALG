@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="background-color: rgba(255, 238, 0, 0.603); padding: 50px;">
+        <select id="select_voto">
+            <option value="cafe">Café</option>
+            <option value="cha">Chá</option>
+            <option value="suco">Suco</option>
+        </select></p>
+        <button onclick="votar()">Votar</button>
+        <button onclick="resultar()">Ver resultado</button>
+        <div id="div_mensagem"></div>
+    </div><br>
+</body>
+</html>
+<script>
+
+    var lista_votos = [];
+
+    function votar() {
+        var voto = select_voto.value;
+        lista_votos.push(voto);
+    }
+
+    function resultar() {
+        var mensagem = "";
+        var cafe = 0;
+        var cha = 0;
+        var suco = 0;
+
+        for (var i = 0; i < lista_votos.length; i++) {
+            if (lista_votos[i] === "cafe") {
+                cafe++;
+            } else if (lista_votos[i] === "cha") {
+                cha++;
+            } else if (lista_votos[i] === "suco") {
+                suco++;
+            }
+        }
+
+        if (cafe > cha && cafe > suco) {
+            mensagem = `Café está ganhando com ${cafe} votos!`;
+        }else if (cha > suco) {
+            mensagem = `Chá está ganhando com ${cha} votos!`;
+        }else {
+            mensagem = `Suco está ganhando com ${suco} votos!`;
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+    
+</script>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <select id="select_num">
+        <option value="3">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+    <p>Até que número a tabuada deve ser construída:</p>
+    <input type="number" id="input_limite">
+    <button onclick="ver()">Ver Tabuada</button>
+    <div id="div_mensagem"></div>
+</body>
+</html>
+<script>
+
+    function ver() {
+        var num = select_num.value;
+        var num_limite = Number(input_limite.value);
+        var mensagem = "";
+        var count = 1;
+
+        while (num_limite >= count) {
+            mensagem += `${num} x ${count} = ${num*count} <br>`;
+
+            count++;
+        }
+
+        div_mensagem.innerHTML = mensagem;
+    }
+    
+</script>

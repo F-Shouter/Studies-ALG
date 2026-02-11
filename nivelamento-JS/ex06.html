@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="background-color: rgba(255, 0, 0, 0.603); padding: 50px;">
+        <p>Nome da música que mais gosta :</p>
+        <input type="text" id="input_nome">
+        <button onclick="cadastrar()">Cadastrar</button>
+        <button onclick="exibir()">Exibir</button>
+        <div id="div_mensagem1"></div>
+    </div><br>
+    
+     <div style="background-color: rgba(0, 26, 255, 0.603); padding: 50px;">
+        <p>De :
+        <input type="text" id="input_de"></p>
+        <p>Até :
+        <input type="text" id="input_ate"></p>
+        <button onclick="filtrar()">Filtrar</button>
+        <div id="div_mensagem2"></div>
+    </div>
+</body>
+</html>
+<script>
+
+    var lista = [];
+
+    function cadastrar() {
+        var nome = input_nome.value;
+        lista.push(nome);
+    }
+
+    function exibir() {
+        var mensagem = "";
+        for (var i = 0; i < lista.length; i++) {
+            mensagem += `${lista[i]} <br>`;
+        }
+        div_mensagem1.innerHTML = mensagem;
+    }
+
+    function filtrar() {
+        var de = Number(input_de.value) - 1;
+        var ate = Number(input_ate.value) - 1;
+        var mensagem2 = "";
+        while (de <= ate) {
+            mensagem2 += `${lista[de]} <br>`;
+            de++;
+        }
+        div_mensagem2.innerHTML = mensagem2;
+    }
+    
+</script>

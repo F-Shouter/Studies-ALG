@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div style="background-color: rgba(255, 238, 0, 0.603); padding: 50px;">
+        <p>Nome da Tarefa :
+        <input type="text" id="input_nome">
+        <select id="select_status">
+            <option value="pendente">Pendente</option>
+            <option value="concluida">Concluída</option>
+        </select></p>
+        <button onclick="adicionar()">Adicionar tarefa</button>
+        <button onclick="exibir()">Exibir todas</button>
+        <button onclick="exibir_pend()">Ver somente pendentes</button>
+        <button onclick="exibir_conc()">Ver somente concluídas</button>
+        <div id="div_mensagem"></div>
+    </div><br>
+</body>
+</html>
+<script>
+
+    var lista_nomes = [];
+    var lista_status = [];
+
+    function adicionar() {
+        var nome = input_nome.value;
+        var status = select_status.value;
+        lista_nomes.push(nome);
+        lista_status.push(status);
+    }
+
+    function exibir() {
+        var mensagem = "";
+        for (var i = 0; i < lista_nomes.length; i++) {
+            mensagem += `${lista_nomes[i]} - ${lista_status[i]} <br>`;
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+    function exibir_pend() {
+        var mensagem = "";
+        for (var i = 0; i < lista_nomes.length; i++) {
+            if (lista_status[i] === "pendente") {
+                mensagem += `${lista_nomes[i]} - ${lista_status[i]} <br>`;
+            }
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+
+    function exibir_conc() {
+        var mensagem = "";
+        for (var i = 0; i < lista_nomes.length; i++) {
+            if (lista_status[i] === "concluida") {
+                mensagem += `${lista_nomes[i]} - ${lista_status[i]} <br>`;
+            }
+        }
+        div_mensagem.innerHTML = mensagem;
+    }
+    
+</script>
